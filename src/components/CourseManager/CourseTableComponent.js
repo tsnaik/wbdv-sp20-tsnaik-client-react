@@ -1,19 +1,41 @@
 import React from "react";
-import CourseTableRow from "./CourseTableRow";
+import CourseTableRowComponent from "./CourseTableRowComponent";
 
-const CourseTableComponent = ({courses}) =>
+const CourseTableComponent = ({courses, deleteCourse}) =>
     <div>
-        <h2>Course Table {courses.length}</h2>
-        <ul>
-            {
-                courses.map(function(course) {
-                    return <CourseTableRow
-                        // showCourseEditor={showCourseEditor}
-                        // deleteCourse={deleteCourse}
-                        key={course._id}
-                        course={course}/>
-                })
-            }
-        </ul>
+        <div className="row justify-content-center">
+            <div className="col">
+                <div className="table-responsive">
+                    <table className="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" className="wbdv-header wbdv-title">Title</th>
+                            <th className="d-none d-md-table-cell wbdv-header wbdv-owner"
+                                scope="col">Owned
+                                By
+                            </th>
+                            <th className="d-none d-md-table-cell wbdv-header wbdv-last-modified"
+                                scope="col">Last Modified
+                            </th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            courses.map(function(course) {
+                                return <CourseTableRowComponent
+                                    // showCourseEditor={showCourseEditor}
+                                    deleteCourse={deleteCourse}
+                                    key={course._id}
+                                    course={course}/>
+                            })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 export default CourseTableComponent

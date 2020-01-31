@@ -1,9 +1,9 @@
 import React from "react";
-import CourseManagerNavbarComponent from "./CourseManagerNavbarComponent";
-import CourseTableComponent from "./CourseTableComponent";
-import CourseGridComponent from "./CourseGridComponent";
+import CourseManagerNavbarComponent from "../components/CourseManager/CourseManagerNavbarComponent";
+import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
+import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
 // import CourseEditor from "./CourseEditor/CourseEditor";
-import {createCourse, deleteCourse, findAllCourses} from "../../services/CourseService"
+import {createCourse, deleteCourse, findAllCourses} from "../services/CourseService"
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -64,8 +64,10 @@ class CourseManagerContainer extends React.Component {
     addCourse = async (newCourseName) => {
         console.log(newCourseName);
         const newCourse = {
-            title: newCourseName
-        }
+            title: newCourseName,
+            last_modified: new Date(Date.now()).toLocaleString(),
+            owned_by: 'me'
+        };
         const actualCourse = await createCourse(newCourse);
         const allCourses = await findAllCourses();
         this.setState({
@@ -115,11 +117,14 @@ class CourseManagerContainer extends React.Component {
                             </div>
                         </div>
                     </nav>
+                    <div className="container-fluid ">
 
                     {this.state.layout === 'table' &&
-                     <CourseTableComponent courses={this.state.courses}/>}
+                     <CourseTableComponent courses={this.state.courses}
+                     deleteCourse={this.deleteCourse}/>}
                     {this.state.layout === 'grid' &&
                      <CourseGridComponent courses={this.state.courses}/>}
+                    </div>
                     {/*<button onClick={this.toggle}>Toggle</button>*/}
                     {/*<input*/}
                     {/*    onChange={this.updateForm}*/}

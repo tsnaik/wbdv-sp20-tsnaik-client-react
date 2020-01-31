@@ -16,6 +16,7 @@ export const updateCourse = async (courseId, course) => {
 };
 
 export const deleteCourse = async (courseId) => {
+    console.log('deleting', courseId);
     const response = await fetch(`${API_URL}/${courseId}`, {
         method: 'DELETE'
     });
