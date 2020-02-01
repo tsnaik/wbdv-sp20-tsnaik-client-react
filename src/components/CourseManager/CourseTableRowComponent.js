@@ -1,5 +1,4 @@
 import React from "react";
-import {updateCourse} from "../../services/CourseService";
 import "./CourseManager.css";
 
 class CourseTableRowComponent extends React.Component {
@@ -16,7 +15,7 @@ class CourseTableRowComponent extends React.Component {
     render() {
         return (
             <tr className={`wbdv-row wbdv-course ${this.state.editing ? 'wbdv-highlight' : ''}`}>
-                <td scope="row" className="align-middle wbdv-row wbdv-icon"><i
+                <td className="align-middle wbdv-row wbdv-icon"><i
                     className="fas fa-book"/></td>
                 <td className="align-middle wbdv-row wbdv-title">
                     <input value={this.state.course.title}
@@ -31,7 +30,8 @@ class CourseTableRowComponent extends React.Component {
                                        course: {
                                            ...this.state.course,
                                            title: e.target.value,
-                                           last_modified: new Date(Date.now()).toLocaleString()
+                                           last_modified: this.props.formatDate(
+                                               new Date(Date.now()))
                                        }
                                    })}
                            onClick={this.props.showCourseEditor}
@@ -48,10 +48,10 @@ class CourseTableRowComponent extends React.Component {
                 </td>
                 <td className="align-middle wbdv-row wbdv-button wbdv-delete">
                     {!this.state.editing &&
-                    <button className="btn"
-                            onClick={() => this.props.deleteCourse(this.props.course)}>
-                        <i className="fas fa-trash text-danger"/>
-                    </button>}
+                     <button className="btn"
+                             onClick={() => this.props.deleteCourse(this.props.course)}>
+                         <i className="fas fa-trash text-danger"/>
+                     </button>}
                 </td>
                 {!this.state.editing &&
                  <td className="align-middle wbdv-row wbdv-button wbdv-edit">

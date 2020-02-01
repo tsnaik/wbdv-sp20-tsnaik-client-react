@@ -119,11 +119,13 @@ class CourseManagerContainer extends React.Component {
                         {this.state.layout === 'table' &&
                          <CourseTableComponent courses={this.state.courses}
                                                deleteCourse={this.deleteCourse}
-                                               updateCourse={this.update}/>}
+                                               updateCourse={this.update}
+                                               formatDate={this.formatDate}/>}
                         {this.state.layout === 'grid' &&
                          <CourseGridComponent courses={this.state.courses}
                                               deleteCourse={this.deleteCourse}
-                                              updateCourse={this.update}/>}
+                                              updateCourse={this.update}
+                                              formatDate={this.formatDate}/>}
                     </div>
 
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import CourseGridCardComponent from "./CourseGridCardComponent";
 
-const CourseGridComponent = ({courses, deleteCourse, updateCourse}) =>
+const CourseGridComponent = ({courses, deleteCourse, updateCourse, formatDate}) =>
     <div className="container">
         <div className="row text-center">
             {
@@ -11,7 +11,8 @@ const CourseGridComponent = ({courses, deleteCourse, updateCourse}) =>
                         deleteCourse={deleteCourse}
                         updateCourse = {updateCourse}
                         key={course._id}
-                        course={course}/>
+                        course={course}
+                        formatDate={formatDate}/>
                 })
             }
         </div>

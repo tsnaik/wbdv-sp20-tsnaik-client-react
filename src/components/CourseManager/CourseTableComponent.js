@@ -1,7 +1,7 @@
 import React from "react";
 import CourseTableRowComponent from "./CourseTableRowComponent";
 
-const CourseTableComponent = ({courses, deleteCourse, updateCourse}) =>
+const CourseTableComponent = ({courses, deleteCourse, updateCourse, formatDate}) =>
     <div className="container-fluid ">
         <div className="row justify-content-center">
             <div className="col">
@@ -30,7 +30,8 @@ const CourseTableComponent = ({courses, deleteCourse, updateCourse}) =>
                                     // showCourseEditor={showCourseEditor}
                                     deleteCourse={deleteCourse}
                                     key={course._id}
-                                    course={course}/>
+                                    course={course}
+                                    formatDate={formatDate}/>
                             })
                         }
                         </tbody>

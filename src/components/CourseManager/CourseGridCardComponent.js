@@ -1,5 +1,6 @@
 import React from "react";
 import thumbnail from "./static/grid_thumbnail.svg";
+import "./CourseManager.css";
 
 class CourseGridCardComponent extends React.Component {
     saveCourse = async () => {
@@ -15,9 +16,11 @@ class CourseGridCardComponent extends React.Component {
     render() {
         return (
             <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
-                <figure className="figure">
+                <figure
+                    className={`figure border rounded px-2 ${this.state.editing ? 'wbdv-highlight'
+                                                                                : ''}`}>
                     <a href="#" className="d-block mb-4 h-100">
-                        <img className="img-fluid img-thumbnail" src={thumbnail}
+                        <img className="img-fluid" src={thumbnail}
                              width="150"/>
                     </a>
                     <figcaption className="figure-caption text-left">
@@ -33,7 +36,8 @@ class CourseGridCardComponent extends React.Component {
                                            course: {
                                                ...this.state.course,
                                                title: e.target.value,
-                                               last_modified: new Date(Date.now()).toLocaleString()
+                                               last_modified: this.props.formatDate(
+                                                   new Date(Date.now()))
                                            }
                                        })}
                                onClick={this.props.showCourseEditor}
@@ -41,7 +45,8 @@ class CourseGridCardComponent extends React.Component {
                                                                          : 'form-control-plaintext wbdv-clickable wbdv-cut-text'}
                                readOnly={!this.state.editing}/>
                         <span>
-                            <div className='wbdv-cut-text'>Modified: {this.state.course.last_modified}</div>
+                            <div
+                                className='wbdv-cut-text'>Modified: {this.state.course.last_modified}</div>
 
                             {!this.state.editing &&
                              <button className="btn pl-0"
