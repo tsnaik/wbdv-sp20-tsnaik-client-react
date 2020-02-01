@@ -38,9 +38,11 @@ class CourseGridCardComponent extends React.Component {
                                        })}
                                onClick={this.props.showCourseEditor}
                                type='text' className={this.state.editing ? 'form-control'
-                                                                         : 'form-control-plaintext wbdv-clickable'}
+                                                                         : 'form-control-plaintext wbdv-clickable wbdv-cut-text'}
                                readOnly={!this.state.editing}/>
                         <span>
+                            <div className='wbdv-cut-text'>Modified: {this.state.course.last_modified}</div>
+
                             {!this.state.editing &&
                              <button className="btn pl-0"
                                      onClick={() => this.props.deleteCourse(this.props.course)}>

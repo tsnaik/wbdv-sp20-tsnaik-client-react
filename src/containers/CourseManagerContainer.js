@@ -20,6 +20,7 @@ class CourseManagerContainer extends React.Component {
                       })
     };
     componentDidMount = async () => {
+        document.title = 'Course Manager | Whiteboard';
         await this.loadAllCourses();
     };
 
@@ -61,13 +62,25 @@ class CourseManagerContainer extends React.Component {
         console.log(newCourseName);
         const newCourse = {
             title: newCourseName,
-            last_modified: new Date(Date.now()).toLocaleString(),
+            last_modified: this.formatDate(new Date(Date.now())),
             owned_by: 'me'
         };
         await createCourse(newCourse);
         await this.loadAllCourses();
     };
+    formatDate = (date) => {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [month, day, year].join('/');
+    }
     updateForm = (e) =>
         this.setState({
                           newCourseTitle: e.target.value
@@ -112,11 +125,6 @@ class CourseManagerContainer extends React.Component {
                                               deleteCourse={this.deleteCourse}
                                               updateCourse={this.update}/>}
                     </div>
-                    {/*<button onClick={this.toggle}>Toggle</button>*/}
-                    {/*<input*/}
-                    {/*    onChange={this.updateForm}*/}
-                    {/*    value={this.state.newCourseTitle}/>*/}
-                    {/*<button onClick={this.addCourse}>Add Course</button>*/}
 
                 </div>
         )
