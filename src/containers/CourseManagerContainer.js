@@ -3,7 +3,7 @@ import CourseManagerNavbarComponent from "../components/CourseManager/CourseMana
 import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
 import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
 // import CourseEditor from "./CourseEditor/CourseEditor";
-import {createCourse, deleteCourse, findAllCourses} from "../services/CourseService"
+import {createCourse, deleteCourse, findAllCourses, updateCourse} from "../services/CourseService"
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -13,28 +13,24 @@ class CourseManagerContainer extends React.Component {
         courses: []
     };
 
-    componentDidMount = async () => {
-
+    loadAllCourses = async () => {
         const allCourses = await findAllCourses();
         this.setState({
                           courses: allCourses
                       })
+    };
+    componentDidMount = async () => {
+        await this.loadAllCourses();
+    };
 
-        // findAllCourses()
-        //     .then(courses => this.setState({
-        //         courses: courses
-        //     }))
+    update = async (courseId, course) => {
+        await updateCourse(courseId, course);
+        await this.loadAllCourses();
     };
 
     deleteCourse = async (deletedCourse) => {
-        const status = await deleteCourse(deletedCourse._id);
-        const courses = await findAllCourses();
-        this.setState({
-                          courses: courses
-                      })
-        // this.setState(prevState => ({
-        //     courses: prevState.courses.filter(course => course._id !== deletedCourse._id)
-        // }))
+        await deleteCourse(deletedCourse._id);
+        await this.loadAllCourses();
     };
 
     toggle = () => {
@@ -68,20 +64,8 @@ class CourseManagerContainer extends React.Component {
             last_modified: new Date(Date.now()).toLocaleString(),
             owned_by: 'me'
         };
-        const actualCourse = await createCourse(newCourse);
-        const allCourses = await findAllCourses();
-        this.setState({
-                          courses: allCourses
-                      })
-        // this.setState(prevState => ({
-        //     courses: [
-        //         ...prevState.courses,
-        //         {
-        //             _id: (new Date()).getTime() + "",
-        //             title: prevState.newCourseTitle
-        //         }
-        //     ]
-        // }))
+        await createCourse(newCourse);
+        await this.loadAllCourses();
     };
 
     updateForm = (e) =>
@@ -119,11 +103,12 @@ class CourseManagerContainer extends React.Component {
                     </nav>
                     <div className="container-fluid ">
 
-                    {this.state.layout === 'table' &&
-                     <CourseTableComponent courses={this.state.courses}
-                     deleteCourse={this.deleteCourse}/>}
-                    {this.state.layout === 'grid' &&
-                     <CourseGridComponent courses={this.state.courses}/>}
+                        {this.state.layout === 'table' &&
+                         <CourseTableComponent courses={this.state.courses}
+                                               deleteCourse={this.deleteCourse}
+                                               updateCourse={this.update}/>}
+                        {this.state.layout === 'grid' &&
+                         <CourseGridComponent courses={this.state.courses}/>}
                     </div>
                     {/*<button onClick={this.toggle}>Toggle</button>*/}
                     {/*<input*/}

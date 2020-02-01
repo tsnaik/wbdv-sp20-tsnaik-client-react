@@ -47,10 +47,11 @@ class CourseTableRowComponent extends React.Component {
                     {this.state.course.last_modified}
                 </td>
                 <td className="align-middle wbdv-row wbdv-button wbdv-delete">
+                    {!this.state.editing &&
                     <button className="btn"
                             onClick={() => this.props.deleteCourse(this.props.course)}>
                         <i className="fas fa-trash text-danger"/>
-                    </button>
+                    </button>}
                 </td>
                 {!this.state.editing &&
                  <td className="align-middle wbdv-row wbdv-button wbdv-edit">
