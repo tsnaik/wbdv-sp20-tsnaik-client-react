@@ -53,6 +53,7 @@ class CourseTableRowComponent extends React.Component {
                          <i className="fas fa-trash text-danger"/>
                      </button>}
                 </td>
+
                 {!this.state.editing &&
                  <td className="align-middle wbdv-row wbdv-button wbdv-edit">
                      <button className="btn"
@@ -60,6 +61,7 @@ class CourseTableRowComponent extends React.Component {
                          <i className="fas fa-edit text-primary"/></button>
                  </td>
                 }
+
                 {this.state.editing &&
                  <td className="align-middle wbdv-row wbdv-button">
                      <button className="btn"
@@ -71,7 +73,6 @@ class CourseTableRowComponent extends React.Component {
             </tr>
         )
     }
-
 }
 
 export default CourseTableRowComponent

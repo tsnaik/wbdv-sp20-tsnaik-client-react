@@ -19,10 +19,11 @@ class CourseGridCardComponent extends React.Component {
                 <figure
                     className={`figure border rounded px-2 ${this.state.editing ? 'wbdv-highlight'
                                                                                 : ''}`}>
-                    <a href="#" className="d-block mb-4 h-100">
+                    <span className="d-block mb-4 h-100 wbdv-clickable"
+                          onClick={this.props.showCourseEditor}>
                         <img className="img-fluid" src={thumbnail}
-                             width="150"/>
-                    </a>
+                             width="150" alt='course thumbnail'/>
+                    </span>
                     <figcaption className="figure-caption text-left">
                         <input value={this.state.course.title}
                                onKeyPress={(event) => {
