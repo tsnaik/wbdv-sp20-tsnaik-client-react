@@ -14,13 +14,13 @@ class CourseGridCardComponent extends React.Component {
 
     render() {
         return (
-            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-1">
+            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
                 <figure className="figure">
                     <a href="#" className="d-block mb-4 h-100">
                         <img className="img-fluid img-thumbnail" src={thumbnail}
                              width="150"/>
                     </a>
-                    <figcaption className="figure-caption">
+                    <figcaption className="figure-caption text-left">
                         <input value={this.state.course.title}
                                onKeyPress={(event) => {
                                    if (event.key === 'Enter') {

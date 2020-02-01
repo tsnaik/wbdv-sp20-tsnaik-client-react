@@ -2,8 +2,8 @@ import React from "react";
 import CourseGridCardComponent from "./CourseGridCardComponent";
 
 const CourseGridComponent = ({courses, deleteCourse, updateCourse}) =>
-    <div className="container ">
-        <div className="row">
+    <div className="container">
+        <div className="row text-center">
             {
                 courses.map(function (course) {
                     return <CourseGridCardComponent
