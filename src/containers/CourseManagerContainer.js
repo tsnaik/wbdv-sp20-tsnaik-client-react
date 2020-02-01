@@ -9,7 +9,7 @@ import CourseEditorComponent from "../components/CourseEditor/CourseEditorCompon
 class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
-        editingCourse: false,
+        editingCourse: true,
         newCourseTitle: '',
         courses: []
     };
