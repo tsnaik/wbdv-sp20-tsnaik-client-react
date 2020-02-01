@@ -5,3 +5,7 @@
 .wbdv-clickable:hover {
     text-decoration: underline;
 }
+
+.wbdv-highlight {
+    background-color: lightblue;
+}

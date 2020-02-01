@@ -15,7 +15,7 @@ class CourseTableRowComponent extends React.Component {
 
     render() {
         return (
-            <tr className="wbdv-row wbdv-course">
+            <tr className={`wbdv-row wbdv-course ${this.state.editing ? 'wbdv-highlight' : ''}`}>
                 <td scope="row" className="align-middle wbdv-row wbdv-icon"><i
                     className="fas fa-book"/></td>
                 <td className="align-middle wbdv-row wbdv-title">

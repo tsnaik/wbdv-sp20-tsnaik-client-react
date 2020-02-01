@@ -6,7 +6,7 @@ const CourseTableComponent = ({courses, deleteCourse}) =>
         <div className="row justify-content-center">
             <div className="col">
                 <div className="table-responsive">
-                    <table className="table table-hover">
+                    <table className="table">
                         <thead>
                         <tr>
                             <th scope="col"></th>
