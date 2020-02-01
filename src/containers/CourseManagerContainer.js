@@ -7,7 +7,7 @@ import {createCourse, deleteCourse, findAllCourses, updateCourse} from "../servi
 
 class CourseManagerContainer extends React.Component {
     state = {
-        layout: 'table',
+        layout: 'grid',
         editingCourse: false,
         newCourseTitle: '',
         courses: []
@@ -101,14 +101,16 @@ class CourseManagerContainer extends React.Component {
                             </div>
                         </div>
                     </nav>
-                    <div className="container-fluid ">
+
 
                         {this.state.layout === 'table' &&
                          <CourseTableComponent courses={this.state.courses}
                                                deleteCourse={this.deleteCourse}
                                                updateCourse={this.update}/>}
                         {this.state.layout === 'grid' &&
-                         <CourseGridComponent courses={this.state.courses}/>}
+                         <CourseGridComponent courses={this.state.courses}
+                                              deleteCourse={this.deleteCourse}
+                                              updateCourse={this.update}/>}
                     </div>
                     {/*<button onClick={this.toggle}>Toggle</button>*/}
                     {/*<input*/}
@@ -117,8 +119,6 @@ class CourseManagerContainer extends React.Component {
                     {/*<button onClick={this.addCourse}>Add Course</button>*/}
 
                 </div>
-
-            </div>
         )
     }
 }

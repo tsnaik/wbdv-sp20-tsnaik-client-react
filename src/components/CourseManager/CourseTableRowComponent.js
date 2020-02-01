@@ -4,7 +4,7 @@ import "./CourseManager.css";
 
 class CourseTableRowComponent extends React.Component {
     saveCourse = async () => {
-        await updateCourse(this.state.course._id, this.state.course);
+        await this.props.updateCourse(this.state.course._id, this.state.course);
         this.setState({editing: false});
     };
 
