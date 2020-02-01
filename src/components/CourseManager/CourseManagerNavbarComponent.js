@@ -31,6 +31,7 @@ class CourseManagerNavbarComponent extends React.Component {
                                onKeyPress={(event) => {
                                    if (event.key === 'Enter') {
                                        this.props.add(this.state.newCourseTitle);
+                                       this.state.newCourseTitle = ''
                                    }
                                }}
                         />
@@ -38,6 +39,7 @@ class CourseManagerNavbarComponent extends React.Component {
                     <li>
                         <button type="button" onClick={() => {
                             this.props.add(this.state.newCourseTitle)
+                            this.state.newCourseTitle = ''
                         }} className="btn wbdv-button wbdv-add-course"><i
                             className="fa fa-plus-circle fa-lg pt-1 text-light"/></button>
                     </li>
