@@ -34,7 +34,12 @@ class CourseTableRowComponent extends React.Component {
                                                new Date(Date.now()))
                                        }
                                    })}
-                           onClick={this.props.showCourseEditor}
+
+                           onClick={ ()=>{
+                               if(this.state.editing === false) {
+                                   this.props.showCourseEditor();
+                               }
+                           }}
                            type='text' className={this.state.editing ? 'form-control'
                                                                      : 'form-control-plaintext wbdv-clickable'}
                            readOnly={!this.state.editing}/>
