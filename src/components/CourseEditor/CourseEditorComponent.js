@@ -3,6 +3,7 @@ import ModuleListComponent from "./ModuleListComponent";
 import './CourseEditor.css'
 import LessonListComponent from "./LessonsListComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
+import WidgetListComponent from "./WidgetListComponent";
 
 const CourseEditorComponent = ({hideCourseEditor}) =>
 
@@ -45,9 +46,31 @@ const CourseEditorComponent = ({hideCourseEditor}) =>
                         {_id: "21", title: "Topic 2"},
                         {_id: "32", title: "Topic 3"},
                     ]}/>
+                    <div className="row mt-2">
+                        <div className="col justify-content-end d-flex">
+                            <div className="form-inline">
+                                <div className="custom-control custom-switch">
+                                    <input type="checkbox" className="custom-control-input"
+                                           id="customSwitch1"/>
+                                        <label className="custom-control-label"
+                                               htmlFor="customSwitch1">Preview</label>
+                                </div>
+                                <span className="ml-2">
+                            <button className="btn btn-success" type="button">Save</button>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <WidgetListComponent
+                        widgets={[
+                            {_id: "13", title: "Widget 1"},
+                        ]}/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>;
+    </div>
+;
 
 export default CourseEditorComponent

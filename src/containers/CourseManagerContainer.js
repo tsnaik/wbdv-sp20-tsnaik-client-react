@@ -2,7 +2,6 @@ import React from "react";
 import CourseManagerNavbarComponent from "../components/CourseManager/CourseManagerNavbarComponent";
 import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
 import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
-// import CourseEditor from "./CourseEditor/CourseEditor";
 import {createCourse, deleteCourse, findAllCourses, updateCourse} from "../services/CourseService"
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
 
@@ -132,7 +131,6 @@ class CourseManagerContainer extends React.Component {
 
                  </div>
                 }
-
                 {
                     this.state.editingCourse
                     && <CourseEditorComponent hideCourseEditor={this.hideCourseEditor}/>
