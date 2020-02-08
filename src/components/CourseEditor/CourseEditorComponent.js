@@ -23,7 +23,14 @@ class CourseEditorComponent extends React.Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item mr-2">
-                        <button onClick={() => this.props.history.push("/")}
+                        <button onClick={() => {
+                            console.log(this.props.history);
+                            if (this.props.history.action === "PUSH") {
+                                this.props.history.goBack();
+                            } else {
+                                this.props.history.push("/table");
+                            }
+                        }}
                                 className="btn btn-outline-light  ">
                             <i className="fas fa-times text-light wbdv-course-editor wbdv-close "/>
                         </button>
