@@ -12,15 +12,10 @@ const ModuleListComponent = ({modules}) =>
             }
 
             <li className="nav-item">
-                <a className="nav-link" href="#">
-                    <div className="input-group">
-                        <input type="text" className="form-control transparent-input"/>
-                        <div className="input-group-append">
+                <span className="nav-link" href="#">
                             <button className="btn bg-none wbdv-module-item-add-btn"><i
                                 className="fas fa-plus "/></button>
-                        </div>
-                    </div>
-                </a>
+                </span>
             </li>
         </ul>
 

@@ -24,7 +24,6 @@ class CourseEditorComponent extends React.Component {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item mr-2">
                         <button onClick={() => {
-                            console.log(this.props.history);
                             if (this.props.history.action === "PUSH") {
                                 this.props.history.goBack();
                             } else {

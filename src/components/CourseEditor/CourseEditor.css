@@ -22,10 +22,22 @@ input.transparent-input {
 
 .wbdv-module-item-add-btn {
     outline: 0;
-    border-width: 0 0 1px;
     border-color: #343a40;
+    float: right;
 }
 
 .wbdv-widget-header, .wbdv-module-item-title {
     display: inline-block;
+}
+
+.wbdv-highlight {
+    background-color: lightblue;
+}
+
+.wbdv-clickable {
+    cursor: pointer;
+    color: #007bff;
+}
+.wbdv-clickable:hover {
+    text-decoration: underline;
 }
