@@ -1,7 +1,7 @@
 import React from "react";
 import CourseTableRowComponent from "./CourseTableRowComponent";
 
-const CourseTableComponent = ({courses, deleteCourse, updateCourse, formatDate, showCourseEditor}) =>
+const CourseTableComponent = ({courses, deleteCourse, updateCourse, formatDate, history}) =>
     <div className="container-fluid ">
         <div className="row justify-content-center">
             <div className="col">
@@ -26,13 +26,12 @@ const CourseTableComponent = ({courses, deleteCourse, updateCourse, formatDate, 
                         {
                             courses.map(function(course) {
                                 return <CourseTableRowComponent
+                                    history={history}
                                     updateCourse={updateCourse}
-                                    // showCourseEditor={showCourseEditor}
                                     deleteCourse={deleteCourse}
                                     key={course._id}
                                     course={course}
-                                    formatDate={formatDate}
-                                    showCourseEditor={showCourseEditor}/>
+                                    formatDate={formatDate}/>
                             })
                         }
                         </tbody>

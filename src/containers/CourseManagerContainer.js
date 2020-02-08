@@ -4,11 +4,15 @@ import CourseTableComponent from "../components/CourseManager/CourseTableCompone
 import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
 import {createCourse, deleteCourse, findAllCourses, updateCourse} from "../services/CourseService"
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
+import {Route} from "react-router-dom";
+import {Router} from "react-router";
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory();
 
 class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
-        editingCourse: false,
         newCourseTitle: '',
         courses: []
     };
@@ -48,16 +52,6 @@ class CourseManagerContainer extends React.Component {
         })
     };
 
-    showCourseEditor = () =>
-        this.setState({
-                          editingCourse: true
-                      });
-
-    hideCourseEditor = () =>
-        this.setState({
-                          editingCourse: false
-                      });
-
     addCourse = async (newCourseName) => {
         console.log(newCourseName);
         const newCourse = {
@@ -87,54 +81,74 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return (
+
             <div>
-                {!this.state.editingCourse &&
-                 <div>
-                     <CourseManagerNavbarComponent add={this.addCourse}/>
-                     <nav className="navbar navbar-light bg-light">
-                         <div className="container-fluid">
-                             <div className="row justify-content-end w-100">
-                                 {this.state.layout === 'table' &&
-                                  <div className="col-1 mx-1">
-                                      <button type="button" onClick={this.toggle} className="btn">
-                                          <i className="fas fa-th fa-lg float-right wbdv-button wbdv-grid-layout"/>
-                                      </button>
-                                  </div>}
-                                 {this.state.layout === 'grid' &&
-                                  <div className="col-1 mx-1">
-                                      <button type="button" onClick={this.toggle} className="btn">
-                                          <i className="fas fa-lg fa-list-ul float-right wbdv-button wbdv-list-layout"/>
-                                      </button>
-                                  </div>}
-                                 <div className="col-1 mx-1">
-                                     <button type="button" className="btn wbdv-header wbdv-sort">
-                                         <i className="fas fa-lg fa-sort-numeric-down float-right"/>
-                                     </button>
+                <Router history={history}>
+                    <Route
+                        path="/course-editor/:courseId"
+                        exact={true}
+                        render={(props) =>
+                            <CourseEditorComponent
+                                courseId={props.match.params.courseId}
+                                {...props}/>
+                        }/>
+
+                    <Route
+                        path="/"
+                        exact={true}
+                        render={(props) =>
+                            <div>
+                                 <div>
+                                     <CourseManagerNavbarComponent add={this.addCourse}/>
+                                     <nav className="navbar navbar-light bg-light">
+                                         <div className="container-fluid">
+                                             <div className="row justify-content-end w-100">
+                                                 {this.state.layout === 'table' &&
+                                                  <div className="col-1 mx-1">
+                                                      <button type="button" onClick={this.toggle}
+                                                              className="btn">
+                                                          <i className="fas fa-th fa-lg float-right wbdv-button wbdv-grid-layout"/>
+                                                      </button>
+                                                  </div>}
+                                                 {this.state.layout === 'grid' &&
+                                                  <div className="col-1 mx-1">
+                                                      <button type="button" onClick={this.toggle}
+                                                              className="btn">
+                                                          <i className="fas fa-lg fa-list-ul float-right wbdv-button wbdv-list-layout"/>
+                                                      </button>
+                                                  </div>}
+                                                 <div className="col-1 mx-1">
+                                                     <button type="button"
+                                                             className="btn wbdv-header wbdv-sort">
+                                                         <i className="fas fa-lg fa-sort-numeric-down float-right"/>
+                                                     </button>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </nav>
+
+                                     {this.state.layout === 'table' &&
+                                      <CourseTableComponent {...props}
+                                                            courses={this.state.courses}
+                                                            deleteCourse={this.deleteCourse}
+                                                            updateCourse={this.update}
+                                                            formatDate={this.formatDate}/>}
+
+                                     {this.state.layout === 'grid' &&
+                                      <CourseGridComponent
+                                          {...props}
+                                          courses={this.state.courses}
+                                          deleteCourse={this.deleteCourse}
+                                          updateCourse={this.update}
+                                          formatDate={this.formatDate}/>}
+
                                  </div>
-                             </div>
-                         </div>
-                     </nav>
 
-                    {this.state.layout === 'table' &&
-                     <CourseTableComponent courses={this.state.courses}
-                                           deleteCourse={this.deleteCourse}
-                                           updateCourse={this.update}
-                                           formatDate={this.formatDate}
-                                           showCourseEditor={this.showCourseEditor}/>}
+                            </div>
 
-                          {this.state.layout === 'grid' &&
-                           <CourseGridComponent courses={this.state.courses}
-                                                deleteCourse={this.deleteCourse}
-                                                updateCourse={this.update}
-                                                formatDate={this.formatDate}
-                                                showCourseEditor={this.showCourseEditor}/>}
+                        }/>
+                </Router>
 
-                 </div>
-                }
-                {
-                    this.state.editingCourse
-                    && <CourseEditorComponent hideCourseEditor={this.hideCourseEditor}/>
-                }
             </div>
         )
     }

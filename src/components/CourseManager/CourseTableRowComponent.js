@@ -37,7 +37,7 @@ class CourseTableRowComponent extends React.Component {
 
                            onClick={ ()=>{
                                if(this.state.editing === false) {
-                                   this.props.showCourseEditor();
+                                   this.props.history.push(`/course-editor/${this.state.course._id}`);
                                }
                            }}
                            type='text' className={this.state.editing ? 'form-control'

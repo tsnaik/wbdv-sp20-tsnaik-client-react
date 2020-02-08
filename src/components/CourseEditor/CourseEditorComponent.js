@@ -5,13 +5,13 @@ import LessonListComponent from "./LessonsListComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
 import WidgetListComponent from "./WidgetListComponent";
 
-const CourseEditorComponent = ({hideCourseEditor}) =>
+const CourseEditorComponent = ({history}) =>
 
     <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item mr-2">
-                    <button onClick={hideCourseEditor}
+                    <button onClick={() => history.push("/")}
                             className="btn btn-outline-light  ">
                         <i className="fas fa-times text-light wbdv-course-editor wbdv-close "/>
                     </button>
