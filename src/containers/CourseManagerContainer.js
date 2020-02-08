@@ -2,7 +2,7 @@ import React from "react";
 import CourseManagerNavbarComponent from "../components/CourseManager/CourseManagerNavbarComponent";
 import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
 import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
-import {createCourse, deleteCourse, findAllCourses, updateCourse} from "../services/CourseService"
+import {createCourse, deleteCourse, findAllCourses, updateCourse, findCourseById} from "../services/CourseService"
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent";
 import {Route} from "react-router-dom";
 import {Router} from "react-router";
@@ -27,7 +27,14 @@ class CourseManagerContainer extends React.Component {
         document.title = 'Course Manager | Whiteboard';
         await this.loadAllCourses();
     };
-
+    getCourseTitleById =  (id) => {
+        console.log("asked", id, this.state.courses);
+        let res = this.state.courses.filter((course) => {
+           return course._id === id;
+        });
+        console.log("giving", res[0]);
+        return res[0];
+    };
     update = async (courseId, course) => {
         await updateCourse(courseId, course);
         await this.loadAllCourses();
@@ -89,6 +96,7 @@ class CourseManagerContainer extends React.Component {
                         exact={true}
                         render={(props) =>
                             <CourseEditorComponent
+                                findCourseById={findCourseById}
                                 courseId={props.match.params.courseId}
                                 {...props}/>
                         }/>

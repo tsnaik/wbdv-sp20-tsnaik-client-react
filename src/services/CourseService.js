@@ -1,8 +1,12 @@
 import {API_URL} from "../common/constants";
 
-export const findCourseById = async (id) => fetch(`${API_URL}${id}/`, {
-    method: 'GET'
-}).then((response) => response.json());
+export const findCourseById = async (id) =>{
+    const response = await fetch(`${API_URL}/${id}/`, {
+        method: 'GET'
+    });
+
+    return await response.json();
+};
 
 export const updateCourse = async (courseId, course) => {
     const response = await fetch(`${API_URL}/${courseId}`, {
@@ -16,15 +20,13 @@ export const updateCourse = async (courseId, course) => {
 };
 
 export const deleteCourse = async (courseId) => {
-    console.log('deleting', courseId);
     const response = await fetch(`${API_URL}/${courseId}`, {
         method: 'DELETE'
     });
     return await response.json()
 };
 
-export const createCourse = async (course) =>
-{
+export const createCourse = async (course) => {
     console.log('course to create', course)
     const response = await fetch(API_URL, {
         method: "POST",
