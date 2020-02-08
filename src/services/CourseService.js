@@ -1,7 +1,7 @@
-import {API_URL} from "../common/constants";
+import {API_URL_COURSES} from "../common/constants";
 
 export const findCourseById = async (id) =>{
-    const response = await fetch(`${API_URL}/${id}/`, {
+    const response = await fetch(`${API_URL_COURSES}/${id}/`, {
         method: 'GET'
     });
 
@@ -9,7 +9,7 @@ export const findCourseById = async (id) =>{
 };
 
 export const updateCourse = async (courseId, course) => {
-    const response = await fetch(`${API_URL}/${courseId}`, {
+    const response = await fetch(`${API_URL_COURSES}/${courseId}`, {
         method: 'PUT',
         body: JSON.stringify(course),
         headers: {
@@ -20,15 +20,14 @@ export const updateCourse = async (courseId, course) => {
 };
 
 export const deleteCourse = async (courseId) => {
-    const response = await fetch(`${API_URL}/${courseId}`, {
+    const response = await fetch(`${API_URL_COURSES}/${courseId}`, {
         method: 'DELETE'
     });
     return await response.json()
 };
 
 export const createCourse = async (course) => {
-    console.log('course to create', course)
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL_COURSES, {
         method: "POST",
         body: JSON.stringify(course),
         headers: {
@@ -39,6 +38,6 @@ export const createCourse = async (course) => {
 };
 
 export const findAllCourses = () => {
-    return fetch(API_URL)
+    return fetch(API_URL_COURSES)
         .then(response => response.json())
 };
