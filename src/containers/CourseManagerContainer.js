@@ -13,6 +13,9 @@ import CourseEditorComponent from "../components/CourseEditor/CourseEditorCompon
 import {Redirect, Route} from "react-router-dom";
 import {Router} from "react-router";
 import createHistory from 'history/createBrowserHistory';
+import {combineReducers, createStore} from "redux";
+import ModuleReducer from "../reducers/ModuleReducer";
+import {Provider} from "react-redux/lib/alternate-renderers";
 
 const history = createHistory();
 
@@ -22,6 +25,7 @@ class CourseManagerContainer extends React.Component {
         newCourseTitle: '',
         courses: []
     };
+
 
     loadAllCourses = async () => {
         const allCourses = await findAllCourses();
@@ -87,100 +91,98 @@ class CourseManagerContainer extends React.Component {
 
     render() {
         return <div>
-            <Router history={history}>
-                <Route
-                    path="/"
-                    exact={true}
-                    render={(props) =>
-                        <Redirect to="/table"/>
 
-                    }/>
-                    
-                <Route
-                    path="/course/:courseId"
-                    exact={true}
-                    render={(props) =>
-                        <CourseEditorComponent
-                            findCourseById={findCourseById}
-                            courseId={props.match.params.courseId}
-                            {...props}/>
-                    }/>
+                <Router history={history}>
+                    <Route
+                        path="/"
+                        exact={true}
+                        render={(props) =>
+                            <Redirect to="/table"/>
 
-                <Route
-                    path="/grid"
-                    exact={true}
-                    render={(props) => {
-                        return <div>
-                            <div>
-                                <CourseManagerNavbarComponent add={this.addCourse}/>
-                                <nav className="navbar navbar-light bg-light">
-                                    <div className="container-fluid">
-                                        <div className="row justify-content-end w-100">
-                                            <div className="col-1 mx-1">
-                                                <button type="button"
-                                                        onClick={() => props.history.push(
-                                                            "/table")}
-                                                        className="btn">
-                                                    <i className="fas fa-lg fa-list-ul float-right wbdv-button wbdv-list-layout"/>
-                                                </button>
-                                            </div>
-                                            <div className="col-1 mx-1">
-                                                <button type="button"
-                                                        className="btn wbdv-header wbdv-sort">
-                                                    <i className="fas fa-lg fa-sort-numeric-down float-right"/>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </nav>
-                                <CourseGridComponent
-                                    {...props}
-                                    courses={this.state.courses}
-                                    deleteCourse={this.deleteCourse}
-                                    updateCourse={this.update}
-                                    formatDate={this.formatDate}/>
-                            </div>
-                        </div>
-                    }}/>
-                {<Route
-                    path="/table"
-                    exact={true}
-                    render={(props) => {
-                        return <div>
-                            <div>
-                                <CourseManagerNavbarComponent add={this.addCourse}/>
-                                <nav className="navbar navbar-light bg-light">
-                                    <div className="container-fluid">
-                                        <div className="row justify-content-end w-100">
-                                            <div className="col-1 mx-1">
-                                                <button type="button"
-                                                        onClick={() => props.history.push(
-                                                            "/grid")}
-                                                        className="btn">
-                                                    <i className="fas fa-th fa-lg float-right wbdv-button wbdv-grid-layout"/>
-                                                </button>
-                                            </div>
-                                            <div className="col-1 mx-1">
-                                                <button type="button"
-                                                        className="btn wbdv-header wbdv-sort">
-                                                    <i className="fas fa-lg fa-sort-numeric-down float-right"/>
-                                                </button>
+                        }/>
+                    <Route
+                        path="/course/:courseId"
+                        exact={true}
+                        render={(props) =>
+                            <CourseEditorComponent
+                                findCourseById={findCourseById}
+                                courseId={props.match.params.courseId}
+                                {...props}/>
+                        }/>
+                    <Route
+                        path="/grid"
+                        exact={true}
+                        render={(props) => {
+                            return <div>
+                                <div>
+                                    <CourseManagerNavbarComponent add={this.addCourse}/>
+                                    <nav className="navbar navbar-light bg-light">
+                                        <div className="container-fluid">
+                                            <div className="row justify-content-end w-100">
+                                                <div className="col-1 mx-1">
+                                                    <button type="button"
+                                                            onClick={() => props.history.push(
+                                                                "/table")}
+                                                            className="btn">
+                                                        <i className="fas fa-lg fa-list-ul float-right wbdv-button wbdv-list-layout"/>
+                                                    </button>
+                                                </div>
+                                                <div className="col-1 mx-1">
+                                                    <button type="button"
+                                                            className="btn wbdv-header wbdv-sort">
+                                                        <i className="fas fa-lg fa-sort-numeric-down float-right"/>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </nav>
-                                <CourseTableComponent {...props}
-                                                      courses={this.state.courses}
-                                                      deleteCourse={this.deleteCourse}
-                                                      updateCourse={this.update}
-                                                      formatDate={this.formatDate}/>
+                                    </nav>
+                                    <CourseGridComponent
+                                        {...props}
+                                        courses={this.state.courses}
+                                        deleteCourse={this.deleteCourse}
+                                        updateCourse={this.update}
+                                        formatDate={this.formatDate}/>
+                                </div>
                             </div>
-                        </div>
-                    }}/>
-                }
+                        }}/>
+                    {<Route
+                        path="/table"
+                        exact={true}
+                        render={(props) => {
+                            return <div>
+                                <div>
+                                    <CourseManagerNavbarComponent add={this.addCourse}/>
+                                    <nav className="navbar navbar-light bg-light">
+                                        <div className="container-fluid">
+                                            <div className="row justify-content-end w-100">
+                                                <div className="col-1 mx-1">
+                                                    <button type="button"
+                                                            onClick={() => props.history.push(
+                                                                "/grid")}
+                                                            className="btn">
+                                                        <i className="fas fa-th fa-lg float-right wbdv-button wbdv-grid-layout"/>
+                                                    </button>
+                                                </div>
+                                                <div className="col-1 mx-1">
+                                                    <button type="button"
+                                                            className="btn wbdv-header wbdv-sort">
+                                                        <i className="fas fa-lg fa-sort-numeric-down float-right"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                    <CourseTableComponent {...props}
+                                                          courses={this.state.courses}
+                                                          deleteCourse={this.deleteCourse}
+                                                          updateCourse={this.update}
+                                                          formatDate={this.formatDate}/>
+                                </div>
+                            </div>
+                        }}/>
+                    }
 
-            </Router>
-
+                </Router>
         </div>
     }
 }

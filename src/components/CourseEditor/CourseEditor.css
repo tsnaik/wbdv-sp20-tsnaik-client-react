@@ -28,6 +28,8 @@ input.transparent-input {
 
 .wbdv-widget-header, .wbdv-module-item-title {
     display: inline-block;
+    padding: .375rem .75rem;
+    line-height: 1.5;
 }
 
 .wbdv-highlight {

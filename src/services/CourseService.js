@@ -41,3 +41,11 @@ export const findAllCourses = () => {
     return fetch(API_URL_COURSES)
         .then(response => response.json())
 };
+
+export default {
+    findCourseById,
+    updateCourse,
+    findAllCourses,
+    createCourse,
+    deleteCourse
+}

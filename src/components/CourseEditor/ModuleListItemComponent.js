@@ -11,22 +11,29 @@ class ModuleListItemComponent extends React.Component {
 
     render() {
         return <li
-            className={`nav-item wbdv-module-item ${this.state.editing ? 'wbdv-highlight' : ''}`}>
+            className="nav-item wbdv-module-item">
 
             {!this.state.editing &&
              <span>
+                 <div className="container">
+                     <div className=" row">
+                     <div className="col-8">
              <span className="nav-link wbdv-module-item-title wbdv-clickable"
                    href="#">{this.state.module.title}</span>
+                     </div>
+                         <div className="col-4">
              <span className="btn pt-1 float-right"
                    onClick={() => this.setState({editing: true})}>
              <i className="fas fa-edit"/></span>
+                         </div>
+                     </div>
+                 </div>
              </span>
             }
 
             {this.state.editing &&
              <span>
                  <div className="container">
-                 <div className="form-inline">
                      <div className=" row">
                      <div className="col-8">
                          <input type='text' className="form-control"
@@ -48,7 +55,7 @@ class ModuleListItemComponent extends React.Component {
                                 value={this.state.module.title}/>
                      </div>
                      <div className="col-2">
-                         <span className="btn "
+                         <span className="btn"
                                onClick={() => {
                                    this.props.updateModule(this.state.module._id,
                                                            this.state.module);
@@ -63,7 +70,6 @@ class ModuleListItemComponent extends React.Component {
                         <i className="fas fa-trash"/></span>
                       </div>
                      </div>
-                 </div>
                  </div>
 
                 </span>
