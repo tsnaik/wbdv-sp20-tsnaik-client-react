@@ -77,7 +77,9 @@ class ModuleListItemComponent extends React.Component {
                       <div className="col-2">
                            <span className="btn wbdv-module-item-delete-btn"
                                  onClick={() => {
-                                     this.props.updateCurrentModuleId(null);
+                                     if (this.props.currentModuleId === this.state.module._id) {
+                                         this.props.updateCurrentModuleId(null);
+                                     }
                                      this.props.deleteModule(this.state.module._id);
                                  }}>
                         <i className="fas fa-trash"/></span>

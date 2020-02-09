@@ -2,11 +2,7 @@ import React from "react";
 import lessonService from "../../services/LessonService";
 import topicService from "../../services/TopicService";
 
-import {
-    deleteLesson,
-    updateLesson,
-    updateLessonId
-} from "../../actions/LessonActions";
+import {deleteLesson, updateLesson, updateLessonId} from "../../actions/LessonActions";
 import {connect} from "react-redux";
 import {setAllTopics, updateTopicId} from "../../actions/TopicActions";
 
@@ -24,7 +20,8 @@ class LessonListItemComponent extends React.Component {
                  <div className='row'>
                      <div className='col-9'>
                          <span className={`nav-link wbdv-clickable 
-                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight' : ''}`}
+                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight'
+                                                                                 : ''}`}
                                onClick={() => {
                                    this.props.updateCurrentLessonId(this.state.lesson._id);
                                    this.props.findAllTopicsForLesson(this.state.lesson._id);
@@ -45,7 +42,8 @@ class LessonListItemComponent extends React.Component {
                  <div className='row'>
                      <div className='col-8'>
                          <input type='text' className={`nav-link form-control 
-                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight' : ''}`}
+                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight'
+                                                                                 : ''}`}
                                 onKeyPress={(event) => {
                                     if (event.key === 'Enter') {
                                         this.props.updateLesson(this.state.lesson._id,
@@ -75,7 +73,9 @@ class LessonListItemComponent extends React.Component {
                      <div className='col-2'>
                      <span className="btn"
                            onClick={() => {
-                               this.props.updateCurrentLessonId(null);
+                               if (this.props.currentLessonId === this.state.lesson._id) {
+                                   this.props.updateCurrentLessonId(null);
+                               }
                                this.props.deleteLesson(this.state.lesson._id);
                            }}>
                          <i className="fas fa-trash"/></span>
@@ -112,7 +112,6 @@ const dispatchToPropertyMapper = (dispatch) => {
                     .then(actual => dispatch(setAllTopics(actual))),
             updateCurrentTopicId: (newId) =>
                 dispatch(updateTopicId(newId)),
-
 
         }
     }
