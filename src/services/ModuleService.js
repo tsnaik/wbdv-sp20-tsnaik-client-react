@@ -14,8 +14,6 @@ export const createModule = async (courseId, module) => {
 };
 
 export const findAllModulesForCourse = (courseId) => {
-    console.log(courseId);
-
     return fetch(`${API_URL_COURSES}/${courseId}/modules`)
         .then(response =>
                   response.json());
@@ -30,6 +28,7 @@ export const findModule = async (moduleId) => {
 };
 
 export const updateModule = async (moduleId, module) => {
+    console.log('update', module);
     const response = await fetch(`${API_URL_MODULES}/${moduleId}`, {
         method: 'PUT',
         body: JSON.stringify(module),
@@ -41,7 +40,6 @@ export const updateModule = async (moduleId, module) => {
 };
 
 export const deleteModule = async (moduleId) => {
-    console.log("deleting", moduleId);
     const response = await fetch(`${API_URL_MODULES}/${moduleId}`, {
         method: 'DELETE'
     });

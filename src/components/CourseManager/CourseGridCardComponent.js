@@ -20,7 +20,7 @@ class CourseGridCardComponent extends React.Component {
                     className={`figure border rounded px-2 ${this.state.editing ? 'wbdv-highlight'
                                                                                 : ''}`}>
                     <span className="d-block mb-4 h-100 wbdv-clickable"
-                          onClick={() => this.props.history.push(`/course-editor/${this.state.course._id}`)}>
+                          onClick={() => this.props.history.push(`/course/${this.state.course._id}`)}>
                         <img className="img-fluid" src={thumbnail}
                              width="150" alt='course thumbnail'/>
                     </span>
@@ -43,7 +43,7 @@ class CourseGridCardComponent extends React.Component {
                                        })}
                                onClick={ ()=>{
                                    if(this.state.editing === false) {
-                                       this.props.history.push(`/course-editor/${this.state.course._id}`);
+                                       this.props.history.push(`/course/${this.state.course._id}`);
                                    }
                                }}
                                type='text' className={this.state.editing ? 'form-control'
