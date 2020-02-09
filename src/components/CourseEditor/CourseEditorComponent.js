@@ -41,11 +41,6 @@ class CourseEditorComponent extends React.Component {
                     <span className="navbar-toggler-icon"/>
                 </button>
 
-                <LessonListComponent lessons={[
-                    {_id: "13", title: "Lesson 1"},
-                    {_id: "21", title: "Lesson 2"},
-                    {_id: "32", title: "Lesson 3"},
-                ]}/>
             </nav>
 
             <div className="container-fluid d-flex flex-column">
@@ -54,6 +49,8 @@ class CourseEditorComponent extends React.Component {
                         <ModuleListComponent courseId={this.props.match.params.courseId}/>
                     </div>
                     <div className="col-sm-8 mt-sm-3 col-md-9">
+                        <LessonListComponent/>
+
                         <TopicPillsComponent topics={[
                             {_id: "13", title: "Topic 1"},
                             {_id: "21", title: "Topic 2"},

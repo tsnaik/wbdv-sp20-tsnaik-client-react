@@ -5,11 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import ModuleReducer from "./reducers/ModuleReducer";
+import LessonReducer from "./reducers/LessonReducer";
 import {Provider} from "react-redux";
 
 const rootReducer = combineReducers({
                                         modules: ModuleReducer,
-                                        // lessons: lessonReducer
+                                        lessons: LessonReducer
                                     });
 const store = createStore(rootReducer);
 

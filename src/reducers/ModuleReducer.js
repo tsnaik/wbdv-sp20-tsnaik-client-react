@@ -9,7 +9,7 @@ import {LOAD_COURSE} from "../actions/CourseActions";
 const initialState = {
     modules: [],
     course: null,
-    currentModuleId: 0
+    currentModuleId: null
 };
 
 const ModuleReducer = (state = initialState, action) => {

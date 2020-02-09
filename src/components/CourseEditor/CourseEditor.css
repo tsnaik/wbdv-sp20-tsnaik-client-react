@@ -43,3 +43,11 @@ input.transparent-input {
 .wbdv-clickable:hover {
     text-decoration: underline;
 }
+
+.wbdv-cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 160px;
+    height: 1.3em;
+    white-space: nowrap;
+}

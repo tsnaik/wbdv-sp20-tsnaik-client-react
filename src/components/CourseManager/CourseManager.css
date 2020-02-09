@@ -9,11 +9,3 @@
 .wbdv-highlight {
     background-color: lightblue;
 }
-
-.wbdv-cut-text {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 160px;
-    height: 1.3em;
-    white-space: nowrap;
-}

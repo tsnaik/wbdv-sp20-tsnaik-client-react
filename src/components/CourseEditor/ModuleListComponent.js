@@ -5,8 +5,8 @@ import {createModule, setAllModules, updateModuleId} from "../../actions/ModuleA
 import moduleService from '../../services/ModuleService'
 
 class ModuleListComponent extends React.Component {
-    async componentDidMount() {
-        await this.props.findAllModulesForCourse(this.props.courseId);
+    componentDidMount() {
+        this.props.findAllModulesForCourse(this.props.courseId);
     }
 
     render() {

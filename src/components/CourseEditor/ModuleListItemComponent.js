@@ -2,6 +2,8 @@ import React from "react";
 import moduleService from "../../services/ModuleService";
 import {deleteModule, updateModule, updateModuleId} from "../../actions/ModuleActions";
 import {connect} from "react-redux";
+import lessonService from "../../services/LessonService";
+import {setAllLessons} from "../../actions/LessonActions";
 
 class ModuleListItemComponent extends React.Component {
     state = {
@@ -11,7 +13,9 @@ class ModuleListItemComponent extends React.Component {
 
     render() {
         return <li
-            className={`nav-item wbdv-module-item ${this.props.currentModuleId === this.state.module._id ? 'wbdv-highlight' : ''}`}>
+            className={`nav-item wbdv-module-item  ${this.props.currentModuleId
+                                                     === this.state.module._id ? 'wbdv-highlight'
+                                                                               : ''}`}>
 
             {!this.state.editing &&
              <span>
@@ -19,7 +23,11 @@ class ModuleListItemComponent extends React.Component {
                      <div className=" row">
                      <div className="col-8  mt-1">
                             <span className="wbdv-clickable"
-                            onClick={() =>this.props.updateCurrentModuleId(this.state.module._id)}>{this.state.module.title}</span>
+                                  onClick={() => {
+                                      this.props.updateCurrentModuleId(this.state.module._id);
+                                      this.props.findAllLessonsForModule(
+                                          this.props.currentModuleId);
+                                  }}>{this.state.module.title}</span>
                      </div>
                      <div className="col-4">
                          <span className="btn pt-1 float-right"
@@ -60,7 +68,7 @@ class ModuleListItemComponent extends React.Component {
                                    this.props.updateModule(this.state.module._id,
                                                            this.state.module);
                                    this.setState({editing: false});
-                                   console.log("after update",this.props);
+                                   console.log("after update", this.props);
                                }}>
                                  <i className="fas fa-check"/></span>
                      </div>
@@ -99,7 +107,10 @@ const dispatchToPropertyMapper = (dispatch) => {
                     .then(status =>
                               dispatch(deleteModule(moduleId))),
             updateCurrentModuleId: (newIndex) =>
-                dispatch(updateModuleId(newIndex))
+                dispatch(updateModuleId(newIndex)),
+            findAllLessonsForModule: (id) =>
+                lessonService.findAllLessonsForModule(id)
+                    .then(actual => dispatch(setAllLessons(actual))),
 
         }
     }

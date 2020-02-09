@@ -1,20 +1,48 @@
 import React from "react";
 import LessonListItemComponent from "./LessonListItemComponent";
+import lessonService from "../../services/LessonService";
+import {createLesson} from "../../actions/LessonActions";
+import {connect} from "react-redux";
 
-const LessonListComponent = ({lessons}) =>
-    <div className="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto ">
+class LessonListComponent extends React.Component {
+    render() {
+        return this.props.currentModuleId && <ul className="nav nav-tabs wbdv-topic-pill-list">
             {
-                lessons.map(lesson =>
-                                <LessonListItemComponent
-                                    key={lesson._id}
-                                    lesson={lesson}/>
+                this.props.lessons &&
+                this.props.lessons.map(
+                    lesson =>
+                        <LessonListItemComponent
+                            key={lesson._id}
+                            lesson={lesson}/>
                 )}
+            <li className="nav-item">
+                <button className="nav-link btn wbdv-new-page-btn"
+                        onClick={() => this.props.createLesson(this.props.currentModuleId)}>
+                    <i className="fas fa-plus"/></button>
+            </li>
         </ul>
-        <div className="my-2 my-lg-0">
-            <button className="btn btn-outline-light text-light wbdv-new-page-btn">
-                <i className="fas fa-plus wbdv-new-page-btn"/></button>
-        </div>
-    </div>;
+    }
+    
+}
 
-export default LessonListComponent
+const stateToPropertyMapper = (state) => {
+    return {
+        lessons: state.lessons.lessons,
+        currentModuleId: state.modules.currentModuleId
+    }
+};
+
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+        createLesson: (id) => {
+            lessonService.createLesson(id, {title: 'New Lesson'})
+                .then(actual =>
+                          dispatch(createLesson(actual)))
+        },
+    }
+};
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper)
+(LessonListComponent)
