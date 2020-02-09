@@ -1,8 +1,6 @@
 import React from "react";
-import moduleService from "../../services/ModuleService";
-import {deleteModule, updateModuleId} from "../../actions/ModuleActions";
 import lessonService from "../../services/LessonService";
-import {updateLesson} from "../../actions/LessonActions";
+import {deleteLesson, updateLesson, updateLessonId} from "../../actions/LessonActions";
 import {connect} from "react-redux";
 
 class LessonListItemComponent extends React.Component {
@@ -31,7 +29,7 @@ class LessonListItemComponent extends React.Component {
             {this.state.editing &&
              <div className='container-fluid'>
                  <div className='row'>
-                     <div class='col-8'>
+                     <div className='col-8'>
                          <input type='text' className="nav-link form-control"
                                 onKeyPress={(event) => {
                                     if (event.key === 'Enter') {
@@ -61,7 +59,10 @@ class LessonListItemComponent extends React.Component {
                      </div>
                      <div className='col-2'>
                      <span className="btn"
-                           onClick={() => this.setState({editing: false})}>
+                           onClick={() => {
+                               this.props.updateCurrentLessonId(null);
+                               this.props.deleteLesson(this.state.lesson._id);
+                           }}>
                          <i className="fas fa-trash"/></span>
                      </div>
                  </div>
@@ -85,12 +86,12 @@ const dispatchToPropertyMapper = (dispatch) => {
                 lessonService.updateLesson(id, obj)
                     .then(() =>
                               dispatch(updateLesson(obj))),
-            deleteModule: (moduleId) =>
-                moduleService.deleteModule(moduleId)
+            deleteLesson: (id) =>
+                lessonService.deleteLesson(id)
                     .then(status =>
-                              dispatch(deleteModule(moduleId))),
-            updateCurrentModuleId: (newIndex) =>
-                dispatch(updateModuleId(newIndex))
+                              dispatch(deleteLesson(id))),
+            updateCurrentLessonId: (newId) =>
+                dispatch(updateLessonId(newId))
 
         }
     }

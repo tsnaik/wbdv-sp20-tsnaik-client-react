@@ -32,7 +32,7 @@ const LessonReducer = (state = initialState, action) => {
             };
         case DELETE_LESSON:
             return {
-                lessons: state.lessons.filter(lesson => lesson._id !== action.moduleId),
+                lessons: state.lessons.filter(lesson => lesson._id !== action.lessonId),
                 module: state.module,
                 currentLessonId: state.currentLessonId
             };
