@@ -8,7 +8,7 @@ import {
 const initialState = {
     lessons: [],
     course: null,
-    currentLessonId: 0
+    currentLessonId: null
 };
 
 const LessonReducer = (state = initialState, action) => {
@@ -48,6 +48,7 @@ const LessonReducer = (state = initialState, action) => {
                 currentLessonId: state.currentLessonId
             };
         case UPDATE_LESSON_ID:
+            console.log('action',action);
             return {
                 lessons: state.lessons,
                 module: state.module,

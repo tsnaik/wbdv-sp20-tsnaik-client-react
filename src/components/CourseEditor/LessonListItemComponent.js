@@ -11,12 +11,20 @@ class LessonListItemComponent extends React.Component {
 
     render() {
         return <span>
-        <li className="nav-item ">
+        <li className="nav-item">
             {!this.state.editing &&
              <div className='container-fluid'>
                  <div className='row'>
                      <div className='col-9'>
-                         <span className="nav-link wbdv-clickable">{this.state.lesson.title}</span>
+                         <span className={`nav-link wbdv-clickable 
+                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight' : ''}`}
+                               onClick={() => {
+                                   this.props.updateCurrentLessonId(this.state.lesson._id);
+                                   console.log(
+                                       this.props.currentLessonId === this.state.lesson._id);
+                                   // this.props.findAllLessonsForModule(this.state.module._id);
+                                   // TODO add find all topics for lesson
+                               }}>{this.state.lesson.title}</span>
                      </div>
                      <div className='col-3'>
                      <span className="btn"
@@ -30,7 +38,8 @@ class LessonListItemComponent extends React.Component {
              <div className='container-fluid'>
                  <div className='row'>
                      <div className='col-8'>
-                         <input type='text' className="nav-link form-control"
+                         <input type='text' className={`nav-link form-control 
+                          ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight' : ''}`}
                                 onKeyPress={(event) => {
                                     if (event.key === 'Enter') {
                                         this.props.updateLesson(this.state.lesson._id,
@@ -76,7 +85,7 @@ class LessonListItemComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         lessons: state.lessons.lessons,
-        currentLessonId: state.modules.currentLessonId
+        currentLessonId: state.lessons.currentLessonId
     }
 };
 

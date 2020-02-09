@@ -13,9 +13,8 @@ class ModuleListItemComponent extends React.Component {
 
     render() {
         return <li
-            className={`nav-item wbdv-module-item  ${this.props.currentModuleId
-                                                     === this.state.module._id ? 'wbdv-highlight'
-                                                                               : ''}`}>
+            className={`nav-item wbdv-module-item  
+            ${this.props.currentModuleId === this.state.module._id ? 'wbdv-highlight' : ''}`}>
 
             {!this.state.editing &&
              <span>

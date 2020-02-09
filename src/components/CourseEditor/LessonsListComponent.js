@@ -1,10 +1,15 @@
 import React from "react";
 import LessonListItemComponent from "./LessonListItemComponent";
 import lessonService from "../../services/LessonService";
-import {createLesson} from "../../actions/LessonActions";
+import {createLesson, updateLessonId} from "../../actions/LessonActions";
 import {connect} from "react-redux";
 
 class LessonListComponent extends React.Component {
+    componentDidMount() {
+        // this.props.findAllModulesForCourse(this.props.courseId);
+        this.props.updateCurrentLessonId(null);
+
+    }
 
     render() {
         return this.props.currentModuleId && <ul className="nav nav-tabs wbdv-topic-pill-list">
@@ -40,6 +45,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                 .then(actual =>
                           dispatch(createLesson(actual)))
         },
+        updateCurrentLessonId: (newId) =>
+            dispatch(updateLessonId(newId))
     }
 };
 
