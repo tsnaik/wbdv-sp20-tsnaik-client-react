@@ -14,15 +14,13 @@ const initialState = {
 const TopicReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_TOPICS_FOR_LESSON:
-            console.log('setting', action);
+            console.log('setting topics', state, action);
             return {
                 topics: action.topics,
                 lesson: state.lesson,
                 currentTopicId: state.currentTopicId
             };
         case CREATE_TOPIC:
-            console.log('creating:' , action.newTopic);
-            console.log('existing', state.topics);
             return {
                 topics: [
                     ...state.topics,

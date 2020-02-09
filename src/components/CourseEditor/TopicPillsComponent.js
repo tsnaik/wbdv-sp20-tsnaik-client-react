@@ -10,7 +10,7 @@ class TopicPillsComponent extends React.Component {
     }
 
     render() {
-        return this.props.currentLessonId && <ul className="nav nav-pills">
+        return ( (this.props.currentModuleId && this.props.currentLessonId) && <ul className="nav nav-pills">
             {
                 this.props.topics &&
                 this.props.topics.map(
@@ -21,23 +21,24 @@ class TopicPillsComponent extends React.Component {
                 )}
             <li className="nav-item">
                 <button className="nav-link btn wbdv-new-page-btn"
-                        onClick={() => this.props.createTopic(this.props.currentTopicId)}>
+                        onClick={() => this.props.createTopic(this.props.currentLessonId)}>
                     <i className="fas fa-plus"/></button>
             </li>
-        </ul>
+        </ul>)
     }
 }
 
 const stateToPropertyMapper = (state) => {
     return {
         topics: state.topics.topics,
-        currentLessonId: state.lessons.currentLessonId
+        currentLessonId: state.lessons.currentLessonId,
+        currentModuleId: state.modules.currentModuleId
     }
 };
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        createLesson: (id) => {
+        createTopic: (id) => {
             topicService.createTopic(id, {title: 'New Topic'})
                 .then(actual =>
                           dispatch(createTopic(actual)))

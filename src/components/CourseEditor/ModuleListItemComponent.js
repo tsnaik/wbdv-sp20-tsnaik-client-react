@@ -3,7 +3,8 @@ import moduleService from "../../services/ModuleService";
 import {deleteModule, updateModule, updateModuleId} from "../../actions/ModuleActions";
 import {connect} from "react-redux";
 import lessonService from "../../services/LessonService";
-import {setAllLessons} from "../../actions/LessonActions";
+import {setAllLessons, updateLessonId} from "../../actions/LessonActions";
+import {updateTopicId} from "../../actions/TopicActions";
 
 class ModuleListItemComponent extends React.Component {
     state = {
@@ -25,6 +26,8 @@ class ModuleListItemComponent extends React.Component {
                               this.props.updateCurrentModuleId(this.state.module._id);
                               this.props.findAllLessonsForModule(
                                   this.state.module._id);
+                              this.props.updateCurrentLessonId(null);
+                              this.props.updateCurrentTopicId(null);
                           }}>
                             <span>{this.state.module.title}</span>
                      </div>
@@ -112,6 +115,10 @@ const dispatchToPropertyMapper = (dispatch) => {
             findAllLessonsForModule: (id) =>
                 lessonService.findAllLessonsForModule(id)
                     .then(actual => dispatch(setAllLessons(actual))),
+            updateCurrentLessonId: (newId) =>
+                dispatch(updateLessonId(newId)),
+            updateCurrentTopicId: (newId) =>
+                dispatch(updateTopicId(newId)),
 
         }
     }

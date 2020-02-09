@@ -4,12 +4,11 @@ import topicService from "../../services/TopicService";
 
 import {
     deleteLesson,
-    setAllLessons,
     updateLesson,
     updateLessonId
 } from "../../actions/LessonActions";
 import {connect} from "react-redux";
-import {setAllTopics} from "../../actions/TopicActions";
+import {setAllTopics, updateTopicId} from "../../actions/TopicActions";
 
 class LessonListItemComponent extends React.Component {
     state = {
@@ -29,7 +28,8 @@ class LessonListItemComponent extends React.Component {
                                onClick={() => {
                                    this.props.updateCurrentLessonId(this.state.lesson._id);
                                    this.props.findAllTopicsForLesson(this.state.lesson._id);
-                                   // TODO add find all topics for lesson
+                                   this.props.updateCurrentTopicId(null);
+
                                }}>{this.state.lesson.title}</span>
                      </div>
                      <div className='col-3'>
@@ -109,7 +109,10 @@ const dispatchToPropertyMapper = (dispatch) => {
                 dispatch(updateLessonId(newId)),
             findAllTopicsForLesson: (id) =>
                 topicService.findAllTopicsForLesson(id)
-                    .then(actual => dispatch(setAllTopics(actual)))
+                    .then(actual => dispatch(setAllTopics(actual))),
+            updateCurrentTopicId: (newId) =>
+                dispatch(updateTopicId(newId)),
+
 
         }
     }
