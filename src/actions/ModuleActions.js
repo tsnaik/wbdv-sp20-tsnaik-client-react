@@ -2,7 +2,7 @@ export const DELETE_MODULE = "DELETE_MODULE";
 export const CREATE_MODULE = "CREATE_MODULE";
 export const SET_MODULES_FOR_COURSE = "SET_MODULES_FOR_COURSE";
 export const UPDATE_MODULE = "UPDATE_MODULE";
-export const UPDATE_MODULE_INDEX = "UPDATE_MODULE_INDEX";
+export const UPDATE_MODULE_ID = "UPDATE_MODULE_ID";
 
 export const deleteModule = (moduleId) => ({
     type: DELETE_MODULE,
@@ -24,7 +24,7 @@ export const updateModule = (module) => ({
     module: module
 });
 
-export const updateModuleIndex = (newIndex) => ({
-    type: UPDATE_MODULE_INDEX,
-    newIndex: newIndex
+export const updateModuleId = (newId) => ({
+    type: UPDATE_MODULE_ID,
+    newIndex: newId
 });

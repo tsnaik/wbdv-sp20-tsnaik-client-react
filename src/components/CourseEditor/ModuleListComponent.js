@@ -1,7 +1,7 @@
 import React from "react";
 import ModuleListItemComponent from "./ModuleListItemComponent";
 import {connect} from "react-redux";
-import {createModule, setAllModules, updateModuleIndex} from "../../actions/ModuleActions";
+import {createModule, setAllModules, updateModuleId} from "../../actions/ModuleActions";
 import moduleService from '../../services/ModuleService'
 
 class ModuleListComponent extends React.Component {
@@ -49,9 +49,6 @@ const dispatchToPropertyMapper = (dispatch) => {
                 .then(actualModule =>
                           dispatch(createModule(actualModule)))
         },
-        updateCurrentModuleIndex: (newIndex) =>
-            dispatch(updateModuleIndex(newIndex))
-
     }
 };
 
