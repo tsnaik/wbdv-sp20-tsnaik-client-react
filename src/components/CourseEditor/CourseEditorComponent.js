@@ -12,17 +12,8 @@ class CourseEditorComponent extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.props.findCourseById(this.props.match.params.courseId)
-            .then((res) => {
-                this.setState({
-                                  course: res
-                              })
-            });
+        this.props.loadCourse(this.props.match.params.courseId);
     }
-
-    state = {
-        course: {}
-    };
 
     render() {
         return <div>
@@ -42,7 +33,7 @@ class CourseEditorComponent extends React.Component {
                     </li>
                 </ul>
                 <span
-                    className="navbar-brand wbdv-course-title">{this.state.course.title}</span>
+                    className="navbar-brand wbdv-course-title">{this.props.course && this.props.course.title}</span>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent"
@@ -98,12 +89,11 @@ class CourseEditorComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        modules: state.modules.course
+        course: state.modules.course
     }
 };
 
 const dispatchToPropertyMapper = (dispatch) => {
-        console.log('loading course');
         return {
             loadCourse: (courseId) =>
                 courseService.findCourseById(courseId)

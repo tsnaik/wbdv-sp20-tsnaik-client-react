@@ -105,7 +105,6 @@ class CourseManagerContainer extends React.Component {
                         exact={true}
                         render={(props) =>
                             <CourseEditorComponent
-                                findCourseById={findCourseById}
                                 courseId={props.match.params.courseId}
                                 {...props}/>
                         }/>

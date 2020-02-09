@@ -1,6 +1,6 @@
 import React from "react";
 import moduleService from "../../services/ModuleService";
-import {deleteModule, updateModule} from "../../actions/ModuleActions";
+import {deleteModule, updateModule, updateModuleIndex} from "../../actions/ModuleActions";
 import {connect} from "react-redux";
 
 class ModuleListItemComponent extends React.Component {
@@ -11,21 +11,21 @@ class ModuleListItemComponent extends React.Component {
 
     render() {
         return <li
-            className="nav-item wbdv-module-item">
+            className={`nav-item wbdv-module-item ${this.props.currentModuleIndex === this.state.module._id ? 'wbdv-highlight' : ''}`}>
 
             {!this.state.editing &&
              <span>
                  <div className="container">
                      <div className=" row">
-                     <div className="col-8">
-             <span className="nav-link wbdv-module-item-title wbdv-clickable"
-                   href="#">{this.state.module.title}</span>
+                     <div className="col-8  mt-1">
+                            <span className="wbdv-clickable"
+                            onClick={() =>this.props.updateCurrentModuleIndex(this.state.module._id)}>{this.state.module.title}</span>
                      </div>
-                         <div className="col-4">
-             <span className="btn pt-1 float-right"
-                   onClick={() => this.setState({editing: true})}>
-             <i className="fas fa-edit"/></span>
-                         </div>
+                     <div className="col-4">
+                         <span className="btn pt-1 float-right"
+                               onClick={() => this.setState({editing: true})}>
+                         <i className="fas fa-edit"/></span>
+                     </div>
                      </div>
                  </div>
              </span>
@@ -60,6 +60,7 @@ class ModuleListItemComponent extends React.Component {
                                    this.props.updateModule(this.state.module._id,
                                                            this.state.module);
                                    this.setState({editing: false});
+                                   console.log("after update",this.props);
                                }}>
                                  <i className="fas fa-check"/></span>
                      </div>
@@ -82,7 +83,8 @@ class ModuleListItemComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        modules: state.modules.modules
+        modules: state.modules.modules,
+        currentModuleIndex: state.modules.currentModuleIndex
     }
 };
 
@@ -96,6 +98,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                 moduleService.deleteModule(moduleId)
                     .then(status =>
                               dispatch(deleteModule(moduleId))),
+            updateCurrentModuleIndex: (newIndex) =>
+                dispatch(updateModuleIndex(newIndex))
 
         }
     }
