@@ -7,8 +7,6 @@ import moduleService from '../../services/ModuleService'
 class ModuleListComponent extends React.Component {
     async componentDidMount() {
         await this.props.findAllModulesForCourse(this.props.courseId);
-        console.log("in module", this.props);
-        this.props.updateCurrentModuleIndex(this.props.modules[0]._id);
     }
 
     render() {
