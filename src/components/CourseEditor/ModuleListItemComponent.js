@@ -20,13 +20,13 @@ class ModuleListItemComponent extends React.Component {
              <span>
                  <div className="container">
                      <div className=" row">
-                     <div className="col-8  mt-1">
-                            <span className="wbdv-clickable"
-                                  onClick={() => {
-                                      this.props.updateCurrentModuleId(this.state.module._id);
-                                      this.props.findAllLessonsForModule(
-                                          this.state.module._id);
-                                  }}>{this.state.module.title}</span>
+                     <div className="col-8  mt-1 wbdv-clickable"
+                          onClick={() => {
+                              this.props.updateCurrentModuleId(this.state.module._id);
+                              this.props.findAllLessonsForModule(
+                                  this.state.module._id);
+                          }}>
+                            <span>{this.state.module.title}</span>
                      </div>
                      <div className="col-4">
                          <span className="btn pt-1 float-right"

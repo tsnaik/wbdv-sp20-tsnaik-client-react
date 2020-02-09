@@ -1,5 +1,4 @@
 import React from "react";
-import "./CourseManager.css";
 
 class CourseTableRowComponent extends React.Component {
     saveCourse = async () => {

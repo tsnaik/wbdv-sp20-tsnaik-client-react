@@ -41,7 +41,7 @@ input.transparent-input {
     color: #007bff;
 }
 .wbdv-clickable:hover {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 .wbdv-cut-text {

@@ -1,7 +1,15 @@
 import React from "react";
 import lessonService from "../../services/LessonService";
-import {deleteLesson, updateLesson, updateLessonId} from "../../actions/LessonActions";
+import topicService from "../../services/TopicService";
+
+import {
+    deleteLesson,
+    setAllLessons,
+    updateLesson,
+    updateLessonId
+} from "../../actions/LessonActions";
 import {connect} from "react-redux";
+import {setAllTopics} from "../../actions/TopicActions";
 
 class LessonListItemComponent extends React.Component {
     state = {
@@ -20,9 +28,7 @@ class LessonListItemComponent extends React.Component {
                           ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight' : ''}`}
                                onClick={() => {
                                    this.props.updateCurrentLessonId(this.state.lesson._id);
-                                   console.log(
-                                       this.props.currentLessonId === this.state.lesson._id);
-                                   // this.props.findAllLessonsForModule(this.state.module._id);
+                                   this.props.findAllTopicsForLesson(this.state.lesson._id);
                                    // TODO add find all topics for lesson
                                }}>{this.state.lesson.title}</span>
                      </div>
@@ -100,7 +106,10 @@ const dispatchToPropertyMapper = (dispatch) => {
                     .then(status =>
                               dispatch(deleteLesson(id))),
             updateCurrentLessonId: (newId) =>
-                dispatch(updateLessonId(newId))
+                dispatch(updateLessonId(newId)),
+            findAllTopicsForLesson: (id) =>
+                topicService.findAllTopicsForLesson(id)
+                    .then(actual => dispatch(setAllTopics(actual)))
 
         }
     }

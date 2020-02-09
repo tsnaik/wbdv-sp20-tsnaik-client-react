@@ -6,13 +6,11 @@ import {connect} from "react-redux";
 
 class LessonListComponent extends React.Component {
     componentDidMount() {
-        // this.props.findAllModulesForCourse(this.props.courseId);
         this.props.updateCurrentLessonId(null);
-
     }
 
     render() {
-        return this.props.currentModuleId && <ul className="nav nav-tabs wbdv-topic-pill-list">
+        return this.props.currentModuleId && <ul className="nav nav-tabs">
             {
                 this.props.lessons &&
                 this.props.lessons.map(
@@ -46,7 +44,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                           dispatch(createLesson(actual)))
         },
         updateCurrentLessonId: (newId) =>
-            dispatch(updateLessonId(newId))
+            dispatch(updateLessonId(newId)),
+
     }
 };
 

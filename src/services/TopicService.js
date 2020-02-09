@@ -1,4 +1,11 @@
 import {API_URL_LESSONS, API_URL_TOPICS} from "../common/Constants";
+import {
+    createLesson,
+    deleteLesson,
+    findAllLessonsForModule,
+    findLesson,
+    updateLesson
+} from "./LessonService";
 
 export const createTopic = async (lessonId, topic) => {
     const response = await fetch(`${API_URL_LESSONS}/${lessonId}/topics`, {
@@ -42,4 +49,12 @@ export const deleteTopic = async (topicId) => {
         method: 'DELETE'
     });
     return await response.json()
+};
+
+export default {
+    deleteTopic,
+    createTopic,
+    findAllTopicsForLesson,
+    updateTopic,
+    findTopic
 };

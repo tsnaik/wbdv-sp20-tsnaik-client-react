@@ -1,6 +1,5 @@
 import React from "react";
 import thumbnail from "./static/grid_thumbnail.svg";
-import "./CourseManager.css";
 
 class CourseGridCardComponent extends React.Component {
     saveCourse = async () => {

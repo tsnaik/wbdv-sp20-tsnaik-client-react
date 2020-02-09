@@ -51,11 +51,7 @@ class CourseEditorComponent extends React.Component {
                     <div className="col-sm-8 mt-sm-3 col-md-9">
                         <LessonListComponent/>
 
-                        <TopicPillsComponent topics={[
-                            {_id: "13", title: "Topic 1"},
-                            {_id: "21", title: "Topic 2"},
-                            {_id: "32", title: "Topic 3"},
-                        ]}/>
+                        <TopicPillsComponent/>
                         <div className="row mt-2">
                             <div className="col justify-content-end d-flex">
                                 <div className="form-inline">
