@@ -1,7 +1,7 @@
 import {
     CREATE_TOPIC,
     DELETE_TOPIC,
-    SET_TOPICS_FOR_LESSON,
+    FIND_TOPIC_FOR_LESSON,
     UPDATE_TOPIC, UPDATE_TOPIC_ID
 } from "../actions/TopicActions";
 
@@ -13,7 +13,7 @@ const initialState = {
 
 const TopicReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_TOPICS_FOR_LESSON:
+        case FIND_TOPIC_FOR_LESSON:
             console.log('setting topics', state, action);
             return {
                 topics: action.topics,

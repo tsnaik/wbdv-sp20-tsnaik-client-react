@@ -1,7 +1,7 @@
 import {
     CREATE_MODULE,
     DELETE_MODULE,
-    SET_MODULES_FOR_COURSE,
+    FIND_MODULE_FOR_COURSE,
     UPDATE_MODULE, UPDATE_MODULE_ID
 } from "../actions/ModuleActions";
 import {LOAD_COURSE} from "../actions/CourseActions";
@@ -21,7 +21,7 @@ const ModuleReducer = (state = initialState, action) => {
                 course: action.course,
                 currentModuleId: state.currentModuleId
             };
-        case SET_MODULES_FOR_COURSE:
+        case FIND_MODULE_FOR_COURSE:
             return {
                 modules: action.modules,
                 course: state.course,

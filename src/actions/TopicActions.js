@@ -1,6 +1,6 @@
 export const DELETE_TOPIC = "DELETE_TOPIC";
 export const CREATE_TOPIC = "CREATE_TOPIC";
-export const SET_TOPICS_FOR_LESSON = "SET_TOPICS_FOR_MODULE";
+export const FIND_TOPIC_FOR_LESSON = "FIND_TOPIC_FOR_LESSON";
 export const UPDATE_TOPIC = "UPDATE_TOPIC";
 export const UPDATE_TOPIC_ID = "UPDATE_TOPIC_ID";
 
@@ -10,7 +10,7 @@ export const deleteTopic = (topicId) => ({
 });
 
 export const setAllTopics = (topics) => ({
-    type: SET_TOPICS_FOR_LESSON,
+    type: FIND_TOPIC_FOR_LESSON,
     topics: topics
 });
 
