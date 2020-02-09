@@ -29,13 +29,6 @@ class CourseEditorComponent extends React.Component {
         course: {}
     };
 
-    componentDidMount() {
-
-        // this.setState({
-        //                   course: res
-        //               });
-        // console.log(this.state.course._id);
-    }
 
     render() {
         return <Provider store={this.store}>

@@ -1,4 +1,4 @@
-import {CREATE_MODULE, DELETE_MODULE} from "../actions/ModuleActions";
+import {CREATE_MODULE, DELETE_MODULE, SET_MODULES_FOR_COURSE} from "../actions/ModuleActions";
 
 const initialState = {
     modules: []
@@ -6,7 +6,7 @@ const initialState = {
 
 const ModuleReducer = (state = initialState, action) => {
     switch(action.type) {
-        case "SET_MODULES_FOR_COURSE":
+        case SET_MODULES_FOR_COURSE:
             return {
                 modules: action.modules
             };

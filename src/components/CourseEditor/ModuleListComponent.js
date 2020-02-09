@@ -44,11 +44,6 @@ const dispatchToPropertyMapper = (dispatch) => {
         findAllModulesForCourse: (courseId) =>
             moduleService.findAllModulesForCourse(courseId)
                 .then(actualModules => dispatch(setAllModules(actualModules))),
-
-        deleteModule: (moduleId) =>
-            moduleService.deleteModule()
-                .then(status =>
-                          dispatch(deleteModule(moduleId))),
         createModule: (courseId) => {
             moduleService.createModule(courseId, {title: 'New Module'})
                 .then(actualModule =>
