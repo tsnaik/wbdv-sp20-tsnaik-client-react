@@ -1,22 +1,63 @@
 import React from "react";
 import ModuleListItemComponent from "./ModuleListItemComponent";
+import {connect} from "react-redux";
+import {createModule, deleteModule, setAllModules} from "../../actions/ModuleActions";
+import moduleService from '../../services/ModuleService'
 
-const ModuleListComponent = ({modules}) =>
-        <ul className="nav nav-pills flex-column wbdv-module-list">
+class ModuleListComponent extends React.Component {
+    componentDidMount() {
+        this.props.findAllModulesForCourse(this.props.courseId);
+    }
+
+    render() {
+        return <ul className="nav nav-pills flex-column wbdv-module-list">
             {
-                modules.map(module =>
-                                <ModuleListItemComponent
-                                    key={module._id}
-                                    module={module}/>
+
+                this.props.modules &&
+                this.props.modules.map(
+                    module =>
+                        <ModuleListItemComponent
+                            key={module._id}
+                            module={module}/>
                 )
             }
 
             <li className="nav-item">
-                <span className="nav-link" href="#">
-                            <button className="btn bg-none wbdv-module-item-add-btn"><i
+                <span className="nav-link">
+                            <button className="btn bg-none wbdv-module-item-add-btn"
+                            onClick={() =>this.props.createModule(this.props.courseId)}><i
                                 className="fas fa-plus "/></button>
                 </span>
             </li>
         </ul>
+    }
+}
 
-export default ModuleListComponent
+const stateToPropertyMapper = (state) => {
+    return {
+        modules: state.modules.modules
+    }
+};
+
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+        findAllModulesForCourse: (courseId) =>
+            moduleService.findAllModulesForCourse(courseId)
+                .then(actualModules => dispatch(setAllModules(actualModules))),
+
+        deleteModule: (moduleId) =>
+            moduleService.deleteModule()
+                .then(status =>
+                          dispatch(deleteModule(moduleId))),
+        createModule: (courseId) => {
+            moduleService.createModule(courseId, {title: 'New Module'})
+                .then(actualModule =>
+                          dispatch(createModule(actualModule)))
+        }
+    }
+};
+
+export default connect(
+    stateToPropertyMapper,
+    dispatchToPropertyMapper)
+(ModuleListComponent)

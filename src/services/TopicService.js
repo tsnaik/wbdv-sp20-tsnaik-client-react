@@ -1,4 +1,4 @@
-import {API_URL_LESSONS, API_URL_TOPICS} from "../common/constants";
+import {API_URL_LESSONS, API_URL_TOPICS} from "../common/Constants";
 
 export const createTopic = async (lessonId, topic) => {
     const response = await fetch(`${API_URL_LESSONS}/${lessonId}/topics`, {

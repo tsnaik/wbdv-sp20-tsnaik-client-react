@@ -1,4 +1,4 @@
-import {API_URL_COURSES} from "../common/constants";
+import {API_URL_COURSES} from "../common/Constants";
 
 export const findCourseById = async (id) =>{
     const response = await fetch(`${API_URL_COURSES}/${id}/`, {

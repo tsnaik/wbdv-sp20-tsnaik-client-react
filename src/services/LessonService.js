@@ -1,4 +1,4 @@
-import {API_URL_MODULES, API_URL_LESSONS} from "../common/constants";
+import {API_URL_MODULES, API_URL_LESSONS} from "../common/Constants";
 
 export const createLesson = async (moduleId, lesson) => {
     const response = await fetch(`${API_URL_MODULES}/${moduleId}/lessons`, {
