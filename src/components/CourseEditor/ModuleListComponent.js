@@ -7,6 +7,8 @@ import moduleService from '../../services/ModuleService'
 class ModuleListComponent extends React.Component {
     componentDidMount() {
         this.props.findAllModulesForCourse(this.props.courseId);
+        this.props.updateCurrentModuleId(null);
+
     }
 
     render() {
@@ -49,6 +51,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                 .then(actualModule =>
                           dispatch(createModule(actualModule)))
         },
+        updateCurrentModuleId: (newIndex) =>
+            dispatch(updateModuleId(newIndex)),
     }
 };
 

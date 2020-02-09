@@ -26,7 +26,7 @@ class ModuleListItemComponent extends React.Component {
                                   onClick={() => {
                                       this.props.updateCurrentModuleId(this.state.module._id);
                                       this.props.findAllLessonsForModule(
-                                          this.props.currentModuleId);
+                                          this.state.module._id);
                                   }}>{this.state.module.title}</span>
                      </div>
                      <div className="col-4">
@@ -74,8 +74,10 @@ class ModuleListItemComponent extends React.Component {
                      </div>
                       <div className="col-2">
                            <span className="btn wbdv-module-item-delete-btn"
-                                 onClick={() => this.props.deleteModule(
-                                     this.state.module._id)}>
+                                 onClick={() => {
+                                     this.props.updateCurrentModuleId(null);
+                                     this.props.deleteModule(this.state.module._id);
+                                 }}>
                         <i className="fas fa-trash"/></span>
                       </div>
                      </div>

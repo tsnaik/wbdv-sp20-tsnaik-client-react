@@ -37,11 +37,11 @@ const LessonReducer = (state = initialState, action) => {
                 currentLessonId: state.currentLessonId
             };
         case UPDATE_LESSON:
-            const index = state.lessons.findIndex(lesson => lesson._id === action.module._id);
+            const index = state.lessons.findIndex(lesson => lesson._id === action.lesson._id);
             return {
                 lessons: [
                     ...state.lessons.slice(0, index),
-                    action.module,
+                    action.lesson,
                     ...state.lessons.slice(index + 1)
                 ],
                 module: state.module,

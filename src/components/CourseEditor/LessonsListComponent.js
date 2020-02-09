@@ -5,6 +5,7 @@ import {createLesson} from "../../actions/LessonActions";
 import {connect} from "react-redux";
 
 class LessonListComponent extends React.Component {
+
     render() {
         return this.props.currentModuleId && <ul className="nav nav-tabs wbdv-topic-pill-list">
             {
@@ -22,7 +23,7 @@ class LessonListComponent extends React.Component {
             </li>
         </ul>
     }
-    
+
 }
 
 const stateToPropertyMapper = (state) => {
