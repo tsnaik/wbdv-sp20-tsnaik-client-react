@@ -33,7 +33,8 @@ class CourseEditorComponent extends React.Component {
                     </li>
                 </ul>
                 <span
-                    className="navbar-brand wbdv-course-title">{this.props.course && this.props.course.title}</span>
+                    className="navbar-brand wbdv-course-title">{this.props.course
+                                                                && this.props.course.title}</span>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent"
@@ -52,27 +53,12 @@ class CourseEditorComponent extends React.Component {
                         <LessonListComponent/>
 
                         <TopicPillsComponent/>
-                        <div className="row mt-2">
-                            <div className="col justify-content-end d-flex">
-                                <div className="form-inline">
-                                    <div className="custom-control custom-switch">
-                                        <input type="checkbox" className="custom-control-input"
-                                               id="customSwitch1"/>
-                                        <label className="custom-control-label"
-                                               htmlFor="customSwitch1">Preview</label>
-                                    </div>
-                                    <span className="ml-2">
-                            <button className="btn btn-success" type="button">Save</button>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <WidgetListComponent
-                                widgets={[
-                                    {_id: "13", title: "Widget 1"},
-                                ]}/>
-                        </div>
+
+
+                        <WidgetListComponent
+                            widgets={[
+                                {_id: "13", title: "Widget 1"},
+                            ]}/>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,24 @@ import {connect} from "react-redux";
 class WidgetListComponent extends React.Component {
     render() {
         return ((this.props.currentModuleId && this.props.currentLessonId
-                && this.props.currentTopicId) && <div>
+                && this.props.currentTopicId) &&
+                <div>
+                    <div>
+                        <div className="row mt-2">
+                            <div className="col justify-content-end d-flex">
+                                <div className="form-inline">
+                                    <div className="custom-control custom-switch">
+                                        <input type="checkbox" className="custom-control-input"
+                                               id="customSwitch1"/>
+                                        <label className="custom-control-label"
+                                               htmlFor="customSwitch1">Preview</label>
+                                    </div>
+                                    <span className="ml-2">
+                            <button className="btn btn-success" type="button">Save</button>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
                 <div className="mt-1 border rounded">
                     <div className="row mx-1 my-2">
                         <div className="col">
@@ -48,6 +65,7 @@ class WidgetListComponent extends React.Component {
                     </div>
                 </div>
             </div>
+                </div>
         )
     }
 }
