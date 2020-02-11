@@ -23,9 +23,11 @@ class LessonListItemComponent extends React.Component {
                           ${this.props.currentLessonId === this.state.lesson._id ? 'wbdv-highlight'
                                                                                  : ''}`}
                                onClick={() => {
-                                   this.props.updateCurrentLessonId(this.state.lesson._id);
-                                   this.props.findAllTopicsForLesson(this.state.lesson._id);
-                                   this.props.updateCurrentTopicId(null);
+                                   if (this.state.lesson._id !== this.props.currentLessonId) {
+                                       this.props.history.push(
+                                           `/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.state.lesson._id}`);
+                                       this.props.updateCurrentTopicId(null);
+                                   }
 
                                }}>{this.state.lesson.title}</span>
                      </div>
@@ -74,7 +76,10 @@ class LessonListItemComponent extends React.Component {
                      <span className="btn"
                            onClick={() => {
                                if (this.props.currentLessonId === this.state.lesson._id) {
+                                   this.props.history.push(
+                                       `/course/${this.props.courseId}/module/${this.props.moduleId}`);
                                    this.props.updateCurrentLessonId(null);
+                                   this.props.updateCurrentTopicId(null);
                                }
                                this.props.deleteLesson(this.state.lesson._id);
                            }}>
@@ -91,7 +96,9 @@ class LessonListItemComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         lessons: state.lessons.lessons,
-        currentLessonId: state.lessons.currentLessonId
+        currentLessonId: state.lessons.currentLessonId,
+        moduleId: state.modules.currentModuleId,
+        courseId: state.modules.course._id
     }
 };
 

@@ -23,11 +23,12 @@ class ModuleListItemComponent extends React.Component {
                      <div className=" row">
                      <div className="col-8  mt-1 wbdv-clickable"
                           onClick={() => {
-                              this.props.updateCurrentModuleId(this.state.module._id);
-                              this.props.findAllLessonsForModule(
-                                  this.state.module._id);
-                              this.props.updateCurrentLessonId(null);
-                              this.props.updateCurrentTopicId(null);
+                              if (this.state.module._id !== this.props.currentModuleId) {
+                                  this.props.history.push(
+                                      `/course/${this.props.courseId}/module/${this.state.module._id}`);
+                                  this.props.updateCurrentLessonId(null);
+                                  this.props.updateCurrentTopicId(null);
+                              }
                           }}>
                             <span>{this.state.module.title}</span>
                      </div>
@@ -78,7 +79,11 @@ class ModuleListItemComponent extends React.Component {
                            <span className="btn wbdv-module-item-delete-btn"
                                  onClick={() => {
                                      if (this.props.currentModuleId === this.state.module._id) {
+                                         this.props.history.push(
+                                             `/course/${this.props.courseId}`);
                                          this.props.updateCurrentModuleId(null);
+                                         this.props.updateCurrentLessonId(null);
+                                         this.props.updateCurrentTopicId(null);
                                      }
                                      this.props.deleteModule(this.state.module._id);
                                  }}>
@@ -98,7 +103,8 @@ class ModuleListItemComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         modules: state.modules.modules,
-        currentModuleId: state.modules.currentModuleId
+        currentModuleId: state.modules.currentModuleId,
+        courseId: state.modules.course._id
     }
 };
 

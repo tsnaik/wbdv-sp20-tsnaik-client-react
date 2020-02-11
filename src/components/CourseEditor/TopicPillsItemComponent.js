@@ -8,6 +8,7 @@ class TopicPillsItemComponent extends React.Component {
         editing: false,
         topic: this.props.topic
     };
+
     render() {
         return <span>
         <li className="nav-item">
@@ -19,7 +20,10 @@ class TopicPillsItemComponent extends React.Component {
                           ${this.props.currentTopicId === this.state.topic._id ? 'wbdv-highlight'
                                                                                : ''}`}
                                onClick={() => {
-                                   this.props.updateCurrentTopicId(this.state.topic._id);
+                                   if (this.state.topic._id !== this.props.currentTopicId) {
+                                       this.props.history.push(
+                                           `/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.state.topic._id}`);
+                                   }
                                    // this.props.findAllWidgetsForLesson(this.state.topic._id);
                                }}>{this.state.topic.title}</span>
                      </div>
@@ -67,7 +71,9 @@ class TopicPillsItemComponent extends React.Component {
                      <div className='col-2'>
                      <span className="btn"
                            onClick={() => {
-                               this.props.updateCurrentTopicId(null);
+                               if (this.state.topic._id === this.props.currentTopicId) {
+                                   this.props.updateCurrentTopicId(null);
+                               }
                                this.props.deleteTopic(this.state.topic._id);
                            }}>
                          <i className="fas fa-trash"/></span>
@@ -84,7 +90,11 @@ class TopicPillsItemComponent extends React.Component {
 const stateToPropertyMapper = (state) => {
     return {
         topics: state.topics.topics,
-        currentTopicId: state.topics.currentTopicId
+        currentTopicId: state.topics.currentTopicId,
+        moduleId: state.modules.currentModuleId,
+        courseId: state.modules.course._id,
+        lessonId: state.lessons.currentLessonId,
+
     }
 };
 
