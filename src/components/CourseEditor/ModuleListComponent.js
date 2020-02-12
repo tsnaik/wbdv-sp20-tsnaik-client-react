@@ -11,7 +11,6 @@ class ModuleListComponent extends React.Component {
     componentDidMount() {
         this.props.findAllModulesForCourse(this.props.courseId);
         this.props.updateCurrentModuleId(null);
-
     }
 
     render() {
@@ -22,7 +21,6 @@ class ModuleListComponent extends React.Component {
                     render={(props) => {
                         this.props.updateCurrentModuleId(props.match.params.moduleId);
                         this.props.findAllLessonsForModule(props.match.params.moduleId);
-                        return (<span></span>);
                     }
                     }/>
                 <ul className="nav nav-pills flex-column wbdv-module-list">

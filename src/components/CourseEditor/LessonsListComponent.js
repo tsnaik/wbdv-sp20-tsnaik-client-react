@@ -20,7 +20,6 @@ class LessonListComponent extends React.Component {
                        render={(props) => {
                            this.props.updateCurrentLessonId(props.match.params.lessonId);
                            this.props.findAllTopicsForLesson(props.match.params.lessonId);
-                           return (<span></span>);
                        }
                        }/>
                    <ul className="nav nav-tabs">

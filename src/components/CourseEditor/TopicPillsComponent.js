@@ -19,7 +19,6 @@ class TopicPillsComponent extends React.Component {
                         render={(props) => {
                             this.props.updateCurrentTopicId(props.match.params.topicId);
                             // this.props.findAllTopicsForLesson(props.match.params.topicId);
-                            return (<span></span>);
                         }
                         }/>
                     <ul className="nav nav-pills">
