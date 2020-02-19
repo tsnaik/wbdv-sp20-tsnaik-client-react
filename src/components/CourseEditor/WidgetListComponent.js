@@ -26,6 +26,7 @@ class WidgetListComponent extends React.Component {
             }
         })
     };
+
     render() {
         return ((this.props.currentModuleId && this.props.currentLessonId
                 && this.props.currentTopicId) &&
@@ -42,19 +43,21 @@ class WidgetListComponent extends React.Component {
                                     </div>
                                     <span className="ml-2">
                             <button className="btn btn-success" type="button"
-                            onClick={()=>this.saveAllWidgets(this.props.currentTopicId, this.props.widgets)}>Save</button>
+                                    onClick={() => this.saveAllWidgets(this.props.currentTopicId,
+                                                                       this.props.widgets)}>Save</button>
                         </span>
                                 </div>
                             </div>
                         </div>
                         {
                             this.props.widgets.map(
-                            widget =>
-                                <WidgetListItemComponent
-                                    key={widget._id}
-                                    widget={widget}/>
-                        )}
-                        <div className="row">
+                                widget =>
+                                    <WidgetListItemComponent
+                                        preview={this.state.preview}
+                                        key={widget._id}
+                                        widget={widget}/>
+                            )}
+                        {this.state.preview === false && <div className="row">
                             <div className="col">
                                 <div className="float-right">
                                     <button className="btn btn-primary m-1"
@@ -65,6 +68,7 @@ class WidgetListComponent extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        }
                     </div>
                 </div>
         )
@@ -83,7 +87,7 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         createWidget: (id) => {
-            widgetService.createWidget(id, {type: 'heading', size:1})
+            widgetService.createWidget(id, {type: 'heading', size: 1})
                 .then(actual =>
                           dispatch(createWidget(actual)))
         },

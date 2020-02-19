@@ -8,10 +8,12 @@ class WidgetListItemComponent extends React.Component {
             <div>
                 {this.props.widget.type === 'heading' &&
                  <HeadingWidgetComponent
+                     preview={this.props.preview}
                      widget={this.props.widget}/>
                 }
                 {this.props.widget.type === 'paragraph' &&
                  <ParagraphWidgetComponent
+                     preview={this.props.preview}
                      widget={this.props.widget}/>
                 }
 

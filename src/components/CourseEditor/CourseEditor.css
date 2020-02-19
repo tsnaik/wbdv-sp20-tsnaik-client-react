@@ -44,6 +44,10 @@ input.transparent-input {
     /*text-decoration: underline;*/
 }
 
+.wbdv-paragraph {
+    white-space:pre-wrap;
+}
+
 .wbdv-cut-text {
     text-overflow: ellipsis;
     overflow: hidden;
