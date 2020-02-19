@@ -1,6 +1,11 @@
 import React from "react";
 import widgetService from "../../../services/WidgetService";
-import {deleteWidget, updateWidget} from "../../../actions/WidgetActions";
+import {
+    deleteWidget,
+    moveWidgetDown,
+    moveWidgetUp,
+    updateWidget
+} from "../../../actions/WidgetActions";
 import {connect} from "react-redux";
 
 class ParagraphWidgetComponent extends React.Component {
@@ -8,28 +13,32 @@ class ParagraphWidgetComponent extends React.Component {
     render() {
         return (
             <div>
-                <div className={`mt-1 ${this.props.preview === false ?'border rounded':''}`}>
-                {this.props.preview === false &&
-                 <div>
-                     <div className="row mx-1 my-2">
-                         <div className="col">
-                             <h5 className="wbdv-widget-header mt-2 align-center">Paragraph
-                                 Widget</h5>
-                             <span className="float-md-right form-inline">
-                        {this.props.index !== this.props.size-1 && <button className="btn btn-info m-1"><i
+                <div className={`mt-1 ${this.props.preview === false ? 'border rounded' : ''}`}>
+                    {this.props.preview === false &&
+                     <div>
+                         <div className="row mx-1 my-2">
+                             <div className="col">
+                                 <h5 className="wbdv-widget-header mt-2 align-center">Paragraph
+                                     Widget</h5>
+                                 <span className="float-md-right form-inline">
+                        {this.props.index !== this.props.size - 1 && <button
+                            className="btn btn-info m-1"
+                            onClick={() => this.props.moveDown(this.props.widget)}><i
                             className="fas fa-arrow-down"/></button>}
-                                 {this.props.index !== 0 &&
-                                  <button className="btn btn-info m-1"><i
-                                      className="fas fa-arrow-up"/></button>}
-                        <select className="custom-select m-1"
-                                value={this.props.widget.type}
-                                onChange={(e) => {
-                                    let newType = e.target.value;
-                                    this.props.updateWidget({
-                                                                ...this.props.widget,
-                                                                type: newType
-                                                            });
-                                }}>
+                                     {this.props.index !== 0 &&
+                                      <button className="btn btn-info m-1"
+                                              onClick={() => this.props.moveUp(this.props.widget)}>
+                                          <i
+                                              className="fas fa-arrow-up"/></button>}
+                                     <select className="custom-select m-1"
+                                             value={this.props.widget.type}
+                                             onChange={(e) => {
+                                                 let newType = e.target.value;
+                                                 this.props.updateWidget({
+                                                                             ...this.props.widget,
+                                                                             type: newType
+                                                                         });
+                                             }}>
                             <option value="heading">Heading</option>
                             <option value="paragraph">Paragraph</option>
                         </select>
@@ -37,11 +46,11 @@ class ParagraphWidgetComponent extends React.Component {
                                 onClick={() => this.props.deleteWidget(this.props.widget._id)}><i
                             className="fas fa-trash"/></button>
                     </span>
+                             </div>
                          </div>
-                     </div>
-                     <div className="row mx-1 my-2">
-                         <div className="col">
-                             <div className="form-group">
+                         <div className="row mx-1 my-2">
+                             <div className="col">
+                                 <div className="form-group">
                             <textarea className="form-control"
                                       placeholder="Paragraph text"
                                       value={this.props.widget.paragraphText}
@@ -53,32 +62,32 @@ class ParagraphWidgetComponent extends React.Component {
                                                                   }
                                           );
                                       }}/>
-                             </div>
+                                 </div>
 
-                             <div className="form-group">
-                                 <input type="text" className="form-control"
-                                        placeholder="Widget Name"
-                                        value={this.props.widget.name}
-                                        onChange={(e) => {
-                                            let newText = e.target.value;
-                                            this.props.updateWidget({
-                                                                        ...this.props.widget,
-                                                                        name: newText
-                                                                    }
-                                            );
-                                        }}/>
+                                 <div className="form-group">
+                                     <input type="text" className="form-control"
+                                            placeholder="Widget Name"
+                                            value={this.props.widget.name}
+                                            onChange={(e) => {
+                                                let newText = e.target.value;
+                                                this.props.updateWidget({
+                                                                            ...this.props.widget,
+                                                                            name: newText
+                                                                        }
+                                                );
+                                            }}/>
+                                 </div>
                              </div>
                          </div>
                      </div>
-                 </div>
-                }
-                <div className="row mx-1 my-2">
-                    <div className="col">
-                        {this.props.preview === false &&<h5>Preview</h5>}
-                        <p className='wbdv-paragraph'>{this.props.widget.paragraphText}</p>
+                    }
+                    <div className="row mx-1 my-2">
+                        <div className="col">
+                            {this.props.preview === false && <h5>Preview</h5>}
+                            <p className='wbdv-paragraph'>{this.props.widget.paragraphText}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         )
     }
@@ -92,6 +101,10 @@ const dispatchToPropertyMapper = (dispatch) => {
                           dispatch(deleteWidget(id))),
         updateWidget: (obj) =>
             dispatch(updateWidget(obj)),
+        moveUp: (obj) =>
+            dispatch(moveWidgetUp(obj)),
+        moveDown: (obj) =>
+            dispatch(moveWidgetDown(obj)),
     }
 };
 

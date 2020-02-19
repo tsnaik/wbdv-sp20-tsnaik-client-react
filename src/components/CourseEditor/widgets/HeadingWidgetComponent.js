@@ -1,5 +1,10 @@
 import React from "react";
-import {deleteWidget, updateWidget} from "../../../actions/WidgetActions";
+import {
+    deleteWidget,
+    moveWidgetDown,
+    moveWidgetUp,
+    updateWidget
+} from "../../../actions/WidgetActions";
 import {connect} from "react-redux";
 import widgetService from "../../../services/WidgetService";
 
@@ -8,7 +13,7 @@ class HeadingWidgetComponent extends React.Component {
     render() {
         return (
             <div>
-                <div className={`mt-1 ${this.props.preview === false ?'border rounded':''}`}>
+                <div className={`mt-1 ${this.props.preview === false ? 'border rounded' : ''}`}>
                     {this.props.preview === false &&
                      <div>
                          <div className="row mx-1 my-2">
@@ -16,20 +21,24 @@ class HeadingWidgetComponent extends React.Component {
                                  <h5 className="wbdv-widget-header mt-2 align-center">Heading
                                      Widget</h5>
                                  <span className="float-md-right form-inline">
-                        {this.props.index !== this.props.size-1 && <button className="btn btn-info m-1"><i
+                        {this.props.index !== this.props.size - 1 && <button
+                            className="btn btn-info m-1"
+                            onClick={() => this.props.moveDown(this.props.widget)}><i
                             className="fas fa-arrow-down"/></button>}
                                      {this.props.index !== 0 &&
-                        <button className="btn btn-info m-1"><i
-                            className="fas fa-arrow-up"/></button>}
-                        <select className="custom-select m-1"
-                                value={this.props.widget.type}
-                                onChange={(e) => {
-                                    let newType = e.target.value;
-                                    this.props.updateWidget({
-                                                                ...this.props.widget,
-                                                                type: newType
-                                                            });
-                                }}>
+                                      <button className="btn btn-info m-1"
+                                              onClick={() => this.props.moveUp(this.props.widget)}>
+                                          <i
+                                              className="fas fa-arrow-up"/></button>}
+                                     <select className="custom-select m-1"
+                                             value={this.props.widget.type}
+                                             onChange={(e) => {
+                                                 let newType = e.target.value;
+                                                 this.props.updateWidget({
+                                                                             ...this.props.widget,
+                                                                             type: newType
+                                                                         });
+                                             }}>
                             <option value="heading">Heading</option>
                             <option value="paragraph">Paragraph</option>
                         </select>
@@ -92,7 +101,7 @@ class HeadingWidgetComponent extends React.Component {
                     }
                     <div className="row mx-1 my-2">
                         <div className="col">
-                            {this.props.preview === false &&<h5>Preview</h5>}
+                            {this.props.preview === false && <h5>Preview</h5>}
                             {this.props.widget.size === 1 && <h1>{this.props.widget.text}</h1>}
                             {this.props.widget.size === 2 && <h2>{this.props.widget.text}</h2>}
                             {this.props.widget.size === 3 && <h3>{this.props.widget.text}</h3>}
@@ -116,6 +125,10 @@ const dispatchToPropertyMapper = (dispatch) => {
                           dispatch(deleteWidget(id))),
         updateWidget: (obj) =>
             dispatch(updateWidget(obj)),
+        moveUp: (obj) =>
+            dispatch(moveWidgetUp(obj)),
+        moveDown: (obj) =>
+            dispatch(moveWidgetDown(obj)),
     }
 };
 
