@@ -21,7 +21,6 @@ class HeadingWidgetComponent extends React.Component {
                                 value={this.props.widget.type}
                                 onChange={(e) => {
                                     let newType = e.target.value;
-                                    // await new Promise(r => setTimeout(r, 1));
                                     this.props.updateWidget(this.props.widget._id,
                                                             {
                                                                 ...this.props.widget,
@@ -42,7 +41,15 @@ class HeadingWidgetComponent extends React.Component {
                         <div className="form-group">
                             <input type="text" className="form-control"
                                    placeholder="Heading text"
-                                   value={this.props.widget.text}/>
+                                   value={this.props.widget.text}
+                                    onChange={(e)=>{
+                                        let newText = e.target.value;
+                                        this.props.updateWidget(this.props.widget._id,
+                                                                {   ...this.props.widget,
+                                                                    text: newText
+                                                                }
+                                        );
+                                    }}/>
                         </div>
                         <div className="form-group">
                             <select className="custom-select"
@@ -66,14 +73,28 @@ class HeadingWidgetComponent extends React.Component {
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control"
-                                   placeholder="Widget Name"/>
+                                   placeholder="Widget Name"
+                                   value={this.props.widget.name}
+                                   onChange={(e)=>{
+                                       let newText = e.target.value;
+                                       this.props.updateWidget(this.props.widget._id,
+                                                               {   ...this.props.widget,
+                                                                   name: newText
+                                                               }
+                                       );
+                                   }}/>
                         </div>
                     </div>
                 </div>
                 <div className="row mx-1 my-2">
                     <div className="col">
                         <h5>Preview</h5>
-                        <h1>Heading text</h1>
+                        {this.props.widget.size == 1 && <h1>{this.props.widget.text}</h1>}
+                        {this.props.widget.size == 2 && <h2>{this.props.widget.text}</h2>}
+                        {this.props.widget.size == 3 && <h3>{this.props.widget.text}</h3>}
+                        {this.props.widget.size == 4 && <h4>{this.props.widget.text}</h4>}
+                        {this.props.widget.size == 5 && <h5>{this.props.widget.text}</h5>}
+                        {this.props.widget.size == 6 && <h6>{this.props.widget.text}</h6>}
                     </div>
                 </div>
             </div>

@@ -39,30 +39,38 @@ class ParagraphWidgetComponent extends React.Component {
                 <div className="row mx-1 my-2">
                     <div className="col">
                         <div className="form-group">
-                            <input type="text" className="form-control"
-                                   placeholder="Heading text"
-                                   value={this.props.widget.text}/>
+                            <textarea className="form-control"
+                                   placeholder="Paragraph text"
+                                   value={this.props.widget.paragraphText}
+                                   onChange={(e)=>{
+                                       let newText = e.target.value;
+                                       this.props.updateWidget(this.props.widget._id,
+                                                               {   ...this.props.widget,
+                                                                   paragraphText: newText
+                                                               }
+                                       );
+                                   }}/>
                         </div>
-                        <div className="form-group">
-                            <select className="custom-select">
-                                <option value="heading1">Heading 1</option>
-                                <option value="heading2">Heading 2</option>
-                                <option value="heading3">Heading 3</option>
-                                <option value="heading4">Heading 4</option>
-                                <option value="heading5">Heading 5</option>
-                                <option value="heading6">Heading 6</option>
-                            </select>
-                        </div>
+
                         <div className="form-group">
                             <input type="text" className="form-control"
-                                   placeholder="Widget Name"/>
+                                   placeholder="Widget Name"
+                                   value={this.props.widget.name}
+                                   onChange={(e)=>{
+                                       let newText = e.target.value;
+                                       this.props.updateWidget(this.props.widget._id,
+                                                               {   ...this.props.widget,
+                                                                   name: newText
+                                                               }
+                                       );
+                                   }}/>
                         </div>
                     </div>
                 </div>
                 <div className="row mx-1 my-2">
                     <div className="col">
                         <h5>Preview</h5>
-                        <h1>Heading text</h1>
+                        <p>{this.props.widget.paragraphText}</p>
                     </div>
                 </div>
             </div>
