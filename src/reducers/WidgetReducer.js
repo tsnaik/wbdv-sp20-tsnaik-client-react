@@ -32,8 +32,9 @@ const WidgetReducer = (state = initialState, action) => {
                 topic: state.topic,
             };
         case UPDATE_WIDGET:
+            console.log('updating', action.widget);
             const index = state.widgets.findIndex(widget => widget._id === action.widget._id);
-            return {
+            let t = {
                 widgets: [
                     ...state.widgets.slice(0, index),
                     action.widget,
@@ -41,6 +42,8 @@ const WidgetReducer = (state = initialState, action) => {
                 ],
                 topic: state.topic,
             };
+            console.log(t);
+            return t;
         default:
             return state
     }

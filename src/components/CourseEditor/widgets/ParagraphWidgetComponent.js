@@ -4,9 +4,6 @@ import {deleteWidget, updateWidget} from "../../../actions/WidgetActions";
 import {connect} from "react-redux";
 
 class ParagraphWidgetComponent extends React.Component {
-    state = {
-        widget: this.props.widget
-    };
 
     render() {
         return (
@@ -21,26 +18,20 @@ class ParagraphWidgetComponent extends React.Component {
                         <button className="btn btn-info m-1"><i
                             className="fas fa-arrow-up"/></button>
                         <select className="custom-select m-1"
-                                value={this.state.widget.type}
+                                value={this.props.widget.type}
                                 onChange={(e) => {
-                                    console.log(this.state.widget.type);
                                     let newType = e.target.value;
-                                    this.setState(prevState => ({
-                                        widget: {
-                                            ...prevState.widget,
-                                            type: newType
-                                        }
-                                    }));
-                                    this.props.updateWidget(this.state.widget._id,
-                                                            this.state.widget);
-                                    console.log(this.state.widget.type);
-
+                                    this.props.updateWidget(this.props.widget._id,
+                                                            {
+                                                                ...this.props.widget,
+                                                                type: newType
+                                                            });
                                 }}>
                             <option value="heading">Heading</option>
                             <option value="paragraph">Paragraph</option>
                         </select>
                         <button className="btn btn-danger m-1"
-                                onClick={() => this.props.deleteWidget(this.state.widget._id)}><i
+                                onClick={() => this.props.deleteWidget(this.props.widget._id)}><i
                             className="fas fa-trash"/></button>
                     </span>
                     </div>
@@ -50,7 +41,7 @@ class ParagraphWidgetComponent extends React.Component {
                         <div className="form-group">
                             <input type="text" className="form-control"
                                    placeholder="Heading text"
-                                   value={this.state.widget.text}/>
+                                   value={this.props.widget.text}/>
                         </div>
                         <div className="form-group">
                             <select className="custom-select">

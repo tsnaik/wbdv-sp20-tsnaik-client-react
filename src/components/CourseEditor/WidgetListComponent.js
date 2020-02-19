@@ -79,7 +79,7 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         createWidget: (id) => {
-            widgetService.createWidget(id, {type: 'heading'})
+            widgetService.createWidget(id, {type: 'heading', size:"1"})
                 .then(actual =>
                           dispatch(createWidget(actual)))
         },
