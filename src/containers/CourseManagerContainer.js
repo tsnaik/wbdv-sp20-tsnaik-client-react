@@ -53,7 +53,6 @@ class CourseManagerContainer extends React.Component {
     };
 
     addCourse = async (newCourseName) => {
-        console.log(newCourseName);
         const newCourse = {
             title: newCourseName,
             last_modified: this.formatDate(new Date(Date.now())),

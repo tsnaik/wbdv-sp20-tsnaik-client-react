@@ -9,7 +9,6 @@ export const createModule = async (courseId, module) => {
         }
     });
     let res = await response.json();
-    console.log(res);
     return res;
 };
 
@@ -28,7 +27,6 @@ export const findModule = async (moduleId) => {
 };
 
 export const updateModule = async (moduleId, module) => {
-    console.log('update', module);
     const response = await fetch(`${API_URL_MODULES}/${moduleId}`, {
         method: 'PUT',
         body: JSON.stringify(module),

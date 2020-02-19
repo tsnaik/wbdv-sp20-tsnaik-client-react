@@ -9,7 +9,6 @@ export const createWidget = async (topicId, widget) => {
         }
     });
     let res = await response.json();
-    console.log(res);
     return res;
 };
 
@@ -22,7 +21,6 @@ export const saveAllWidgets = async (topicId, widgets) => {
         }
     });
     let res = await response.json();
-    console.log('saved all',res);
     return res;
 };
 

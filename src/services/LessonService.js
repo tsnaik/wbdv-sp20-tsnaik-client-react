@@ -9,7 +9,6 @@ export const createLesson = async (moduleId, lesson) => {
         }
     });
     let res = await response.json();
-    console.log(res);
     return res;
 };
 

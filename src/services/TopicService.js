@@ -9,7 +9,6 @@ export const createTopic = async (lessonId, topic) => {
         }
     });
     let res = await response.json();
-    console.log(res);
     return res;
 };
 

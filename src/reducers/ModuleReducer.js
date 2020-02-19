@@ -15,7 +15,6 @@ const initialState = {
 const ModuleReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_COURSE:
-            console.log('loading course', action.course);
             return {
                 modules: [...state.modules],
                 course: action.course,

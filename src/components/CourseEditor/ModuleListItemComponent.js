@@ -71,7 +71,6 @@ class ModuleListItemComponent extends React.Component {
                                    this.props.updateModule(this.state.module._id,
                                                            this.state.module);
                                    this.setState({editing: false});
-                                   console.log("after update", this.props);
                                }}>
                                  <i className="fas fa-check"/></span>
                      </div>

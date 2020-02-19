@@ -20,8 +20,6 @@ const LessonReducer = (state = initialState, action) => {
                 currentLessonId: state.currentLessonId
             };
         case CREATE_LESSON:
-            console.log('creating:' , action.newLesson);
-            console.log('existing', state.lessons);
             return {
                 lessons: [
                     ...state.lessons,
@@ -48,7 +46,6 @@ const LessonReducer = (state = initialState, action) => {
                 currentLessonId: state.currentLessonId
             };
         case UPDATE_LESSON_ID:
-            console.log('action',action);
             return {
                 lessons: state.lessons,
                 module: state.module,

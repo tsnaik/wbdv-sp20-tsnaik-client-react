@@ -14,7 +14,6 @@ const initialState = {
 const TopicReducer = (state = initialState, action) => {
     switch (action.type) {
         case FIND_TOPIC_FOR_LESSON:
-            console.log('setting topics', state, action);
             return {
                 topics: action.topics,
                 lesson: state.lesson,
@@ -47,7 +46,6 @@ const TopicReducer = (state = initialState, action) => {
                 currentTopicId: state.currentTopicId
             };
         case UPDATE_TOPIC_ID:
-            console.log('action',action);
             return {
                 topics: state.topics,
                 lesson: state.lesson,

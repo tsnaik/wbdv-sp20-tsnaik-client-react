@@ -13,7 +13,6 @@ class WidgetListComponent extends React.Component {
     };
 
     togglePreview = () => {
-        console.log('switching:', this.state.preview);
         this.setState((prevState) => {
             if (prevState.preview === true) {
                 return {
