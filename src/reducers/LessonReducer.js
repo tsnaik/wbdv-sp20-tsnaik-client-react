@@ -7,7 +7,7 @@ import {
 
 const initialState = {
     lessons: [],
-    course: null,
+    module: null,
     currentLessonId: null
 };
 

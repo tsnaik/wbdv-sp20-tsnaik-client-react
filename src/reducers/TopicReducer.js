@@ -7,7 +7,7 @@ import {
 
 const initialState = {
     topics: [],
-    course: null,
+    lesson: null,
     currentTopicId: null
 };
 

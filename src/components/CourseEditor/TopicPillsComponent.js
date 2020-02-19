@@ -1,10 +1,11 @@
 import React from "react";
 import TopicPillsItemComponent from "./TopicPillsItemComponent";
 import topicService from "../../services/TopicService";
+import widgetService from "../../services/WidgetService";
 import {connect} from "react-redux";
 import {createTopic, setAllTopics, updateTopicId} from "../../actions/TopicActions";
 import {Route, Router} from "react-router";
-import LessonListItemComponent from "./LessonListItemComponent";
+import {setAllWidgets} from "../../actions/WidgetActions";
 
 class TopicPillsComponent extends React.Component {
     componentDidMount() {
@@ -18,7 +19,7 @@ class TopicPillsComponent extends React.Component {
                         path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId"
                         render={(props) => {
                             this.props.updateCurrentTopicId(props.match.params.topicId);
-                            // this.props.findAllTopicsForLesson(props.match.params.topicId);
+                            this.props.findAllWidgetsForTopic(props.match.params.topicId);
                         }
                         }/>
                     <ul className="nav nav-pills">
@@ -60,6 +61,10 @@ const dispatchToPropertyMapper = (dispatch) => {
         },
         updateCurrentTopicId: (newId) =>
             dispatch(updateTopicId(newId)),
+
+        findAllWidgetsForTopic: (id) =>
+            widgetService.findAllWidgetsForTopic(id)
+                .then(actual => dispatch(setAllWidgets(actual))),
 
     }
 };

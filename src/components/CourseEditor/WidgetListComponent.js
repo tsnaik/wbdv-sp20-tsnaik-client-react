@@ -1,7 +1,28 @@
 import React from "react";
 import {connect} from "react-redux";
+import widgetService from "../../services/WidgetService";
+import {createWidget} from "../../actions/WidgetActions";
+import WidgetListItemComponent from "./widgets/WidgetListItemComponent";
 
 class WidgetListComponent extends React.Component {
+    state = {
+        preview: false
+    };
+
+    togglePreview = () => {
+        console.log('switching:', this.state.preview);
+        this.setState((prevState) => {
+            if (prevState.preview === true) {
+                return {
+                    preview: false
+                }
+            } else {
+                return {
+                    preview: true
+                }
+            }
+        })
+    };
     render() {
         return ((this.props.currentModuleId && this.props.currentLessonId
                 && this.props.currentTopicId) &&
@@ -12,7 +33,7 @@ class WidgetListComponent extends React.Component {
                                 <div className="form-inline">
                                     <div className="custom-control custom-switch">
                                         <input type="checkbox" className="custom-control-input"
-                                               id="customSwitch1"/>
+                                               id="customSwitch1" onChange={this.togglePreview}/>
                                         <label className="custom-control-label"
                                                htmlFor="customSwitch1">Preview</label>
                                     </div>
@@ -22,49 +43,25 @@ class WidgetListComponent extends React.Component {
                                 </div>
                             </div>
                         </div>
-                <div className="mt-1 border rounded">
-                    <div className="row mx-1 my-2">
-                        <div className="col">
-                            <h5 className="wbdv-widget-header mt-2 align-center">Heading Widget</h5>
-                            <span className="float-md-right form-inline">
-                        <button className="btn btn-info m-1"><i
-                            className="fas fa-arrow-down"/></button>
-                        <button className="btn btn-info m-1"><i
-                            className="fas fa-arrow-up"/></button>
-                        <select className="custom-select m-1">
-                            <option value="heading">Heading</option>
-                        </select>
-                        <button className="btn btn-danger m-1"><i
-                            className="fas fa-times"/></button>
-                    </span>
-                        </div>
-                    </div>
-                    <div className="row mx-1 my-2">
-                        <div className="col">
-                            <div className="form-group">
-                                <input type="text" className="form-control"
-                                       placeholder="Heading text"
-                                       value="Heading text"/>
-                            </div>
-                            <div className="form-group">
-                                <select className="custom-select">
-                                    <option value="heading1">Heading 1</option>
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <input type="text" className="form-control"
-                                       placeholder="Widget Name"/>
+                        {
+                            this.props.widgets.map(
+                            widget =>
+                                <WidgetListItemComponent
+                                    key={widget._id}
+                                    widget={widget}/>
+                        )}
+                        <div className="row">
+                            <div className="col">
+                                <div className="float-right">
+                                    <button className="btn btn-primary m-1"
+                                            onClick={() => this.props.createWidget(
+                                                this.props.currentTopicId)}>
+                                        <i className="fas fa-plus-circle"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row mx-1 my-2">
-                        <div className="col">
-                            <h5>Preview</h5>
-                            <h1>Heading text</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
                 </div>
         )
     }
@@ -72,17 +69,20 @@ class WidgetListComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        topics: state.topics.topics,
+        widgets: state.widgets.widgets,
         currentLessonId: state.lessons.currentLessonId,
         currentModuleId: state.modules.currentModuleId,
         currentTopicId: state.topics.currentTopicId
-
     }
 };
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        //TODO implement
+        createWidget: (id) => {
+            widgetService.createWidget(id, {type: 'heading'})
+                .then(actual =>
+                          dispatch(createWidget(actual)))
+        },
     }
 };
 

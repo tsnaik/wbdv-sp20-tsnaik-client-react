@@ -15,7 +15,7 @@ export const setAllWidgets = (widgets) => ({
 
 export const createWidget = (widget) => ({
     type: CREATE_WIDGET,
-    newwidget: widget
+    newWidget: widget
 });
 
 export const updateWidget = (widget) => ({

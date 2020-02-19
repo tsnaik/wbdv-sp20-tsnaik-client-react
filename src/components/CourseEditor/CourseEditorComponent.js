@@ -62,9 +62,7 @@ class CourseEditorComponent extends React.Component {
                                 <WidgetListComponent
                                     history={this.props.history}
                                     match={this.props.match}
-                                    widgets={[
-                                        {_id: "13", title: "Widget 1"},
-                                    ]}/>
+                                />
                             </div>
                         </div>
                     </div>
