@@ -21,8 +21,7 @@ class ParagraphWidgetComponent extends React.Component {
                                 value={this.props.widget.type}
                                 onChange={(e) => {
                                     let newType = e.target.value;
-                                    this.props.updateWidget(this.props.widget._id,
-                                                            {
+                                    this.props.updateWidget({
                                                                 ...this.props.widget,
                                                                 type: newType
                                                             });
@@ -44,8 +43,7 @@ class ParagraphWidgetComponent extends React.Component {
                                    value={this.props.widget.paragraphText}
                                    onChange={(e)=>{
                                        let newText = e.target.value;
-                                       this.props.updateWidget(this.props.widget._id,
-                                                               {   ...this.props.widget,
+                                       this.props.updateWidget({   ...this.props.widget,
                                                                    paragraphText: newText
                                                                }
                                        );
@@ -58,8 +56,7 @@ class ParagraphWidgetComponent extends React.Component {
                                    value={this.props.widget.name}
                                    onChange={(e)=>{
                                        let newText = e.target.value;
-                                       this.props.updateWidget(this.props.widget._id,
-                                                               {   ...this.props.widget,
+                                       this.props.updateWidget({   ...this.props.widget,
                                                                    name: newText
                                                                }
                                        );

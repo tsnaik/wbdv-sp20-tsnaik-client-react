@@ -20,8 +20,7 @@ class HeadingWidgetComponent extends React.Component {
                                 value={this.props.widget.type}
                                 onChange={(e) => {
                                     let newType = e.target.value;
-                                    this.props.updateWidget(this.props.widget._id,
-                                                            {
+                                    this.props.updateWidget({
                                                                 ...this.props.widget,
                                                                 type: newType
                                                             });
@@ -43,8 +42,7 @@ class HeadingWidgetComponent extends React.Component {
                                    value={this.props.widget.text}
                                    onChange={(e) => {
                                        let newText = e.target.value;
-                                       this.props.updateWidget(this.props.widget._id,
-                                                               {
+                                       this.props.updateWidget({
                                                                    ...this.props.widget,
                                                                    text: newText
                                                                }
@@ -56,8 +54,7 @@ class HeadingWidgetComponent extends React.Component {
                                     value={this.props.widget.size}
                                     onChange={(e) => {
                                         let newSize = e.target.value;
-                                        this.props.updateWidget(this.props.widget._id,
-                                                                {
+                                        this.props.updateWidget({
                                                                     ...this.props.widget,
                                                                     size: newSize
                                                                 }
@@ -77,8 +74,7 @@ class HeadingWidgetComponent extends React.Component {
                                    value={this.props.widget.name}
                                    onChange={(e) => {
                                        let newText = e.target.value;
-                                       this.props.updateWidget(this.props.widget._id,
-                                                               {
+                                       this.props.updateWidget({
                                                                    ...this.props.widget,
                                                                    name: newText
                                                                }
