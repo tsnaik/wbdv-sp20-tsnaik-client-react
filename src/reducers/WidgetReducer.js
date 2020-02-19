@@ -2,7 +2,7 @@ import {
     CREATE_WIDGET,
     DELETE_WIDGET,
     FIND_ALL_WIDGETS_FOR_TOPIC,
-    UPDATE_WIDGET
+    UPDATE_WIDGET, WIDGET_MOVE_UP
 } from "../actions/WidgetActions";
 
 const initialState = {
@@ -34,7 +34,7 @@ const WidgetReducer = (state = initialState, action) => {
         case UPDATE_WIDGET:
             console.log('updating', action.widget);
             const index = state.widgets.findIndex(widget => widget._id === action.widget._id);
-            let t = {
+            return {
                 widgets: [
                     ...state.widgets.slice(0, index),
                     action.widget,
@@ -42,8 +42,8 @@ const WidgetReducer = (state = initialState, action) => {
                 ],
                 topic: state.topic,
             };
-            console.log(t);
-            return t;
+        case WIDGET_MOVE_UP:
+
         default:
             return state
     }

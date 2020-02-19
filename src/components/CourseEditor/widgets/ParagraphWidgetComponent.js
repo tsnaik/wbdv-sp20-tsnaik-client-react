@@ -16,10 +16,11 @@ class ParagraphWidgetComponent extends React.Component {
                              <h5 className="wbdv-widget-header mt-2 align-center">Paragraph
                                  Widget</h5>
                              <span className="float-md-right form-inline">
-                        <button className="btn btn-info m-1"><i
-                            className="fas fa-arrow-down"/></button>
-                        <button className="btn btn-info m-1"><i
-                            className="fas fa-arrow-up"/></button>
+                        {this.props.index !== this.props.size-1 && <button className="btn btn-info m-1"><i
+                            className="fas fa-arrow-down"/></button>}
+                                 {this.props.index !== 0 &&
+                                  <button className="btn btn-info m-1"><i
+                                      className="fas fa-arrow-up"/></button>}
                         <select className="custom-select m-1"
                                 value={this.props.widget.type}
                                 onChange={(e) => {

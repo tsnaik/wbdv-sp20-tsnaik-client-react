@@ -51,11 +51,13 @@ class WidgetListComponent extends React.Component {
                         </div>
                         {
                             this.props.widgets.map(
-                                widget =>
+                                (widget,index) =>
                                     <WidgetListItemComponent
                                         preview={this.state.preview}
                                         key={widget._id}
-                                        widget={widget}/>
+                                        widget={widget}
+                                    index={index}
+                                    size={this.props.widgets.length}/>
                             )}
                         {this.state.preview === false && <div className="row">
                             <div className="col">
