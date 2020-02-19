@@ -13,6 +13,19 @@ export const createWidget = async (topicId, widget) => {
     return res;
 };
 
+export const saveAllWidgets = async (topicId, widgets) => {
+    const response = await fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets-collection`, {
+        method: "POST",
+        body: JSON.stringify(widgets),
+        headers: {
+            'content-type': 'application/json'
+        }
+    });
+    let res = await response.json();
+    console.log('saved all',res);
+    return res;
+};
+
 export const findAllWidgetsForTopic = (topicId) => {
     return fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets`)
         .then(response => response.json());
@@ -49,5 +62,6 @@ export default {
     createWidget,
     findAllWidgetsForTopic,
     updateWidget,
-    findWidget
+    findWidget,
+    saveAllWidgets
 };

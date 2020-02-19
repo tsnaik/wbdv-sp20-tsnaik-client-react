@@ -81,9 +81,8 @@ class ParagraphWidgetComponent extends React.Component {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         deleteWidget: (id) =>
-            widgetService.deleteWidget(id)
-                .then(status =>
-                          dispatch(deleteWidget(id))),
+            status =>
+                dispatch(deleteWidget(id)),
         updateWidget: (id, obj) =>
             dispatch(updateWidget(obj)),
     }

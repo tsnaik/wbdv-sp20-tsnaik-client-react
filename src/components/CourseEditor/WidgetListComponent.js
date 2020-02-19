@@ -8,6 +8,9 @@ class WidgetListComponent extends React.Component {
     state = {
         preview: false
     };
+    saveAllWidgets = (id, widgets) => {
+        widgetService.saveAllWidgets(id, widgets);
+    };
 
     togglePreview = () => {
         console.log('switching:', this.state.preview);
@@ -38,7 +41,8 @@ class WidgetListComponent extends React.Component {
                                                htmlFor="customSwitch1">Preview</label>
                                     </div>
                                     <span className="ml-2">
-                            <button className="btn btn-success" type="button">Save</button>
+                            <button className="btn btn-success" type="button"
+                            onClick={()=>this.saveAllWidgets(this.props.currentTopicId, this.props.widgets)}>Save</button>
                         </span>
                                 </div>
                             </div>
@@ -79,7 +83,7 @@ const stateToPropertyMapper = (state) => {
 const dispatchToPropertyMapper = (dispatch) => {
     return {
         createWidget: (id) => {
-            widgetService.createWidget(id, {type: 'heading', size:"1"})
+            widgetService.createWidget(id, {type: 'heading', size:1})
                 .then(actual =>
                           dispatch(createWidget(actual)))
         },
