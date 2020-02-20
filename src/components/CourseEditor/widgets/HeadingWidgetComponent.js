@@ -64,7 +64,7 @@ const HeadingWidgetComponent = (props) =>
                                      <select className="custom-select"
                                              value={props.widget.size}
                                              onChange={(e) => {
-                                                 let newSize = e.target.value;
+                                                 let newSize = parseInt(e.target.value);
                                                  props.updateWidget({
                                                                              ...props.widget,
                                                                              size: newSize
