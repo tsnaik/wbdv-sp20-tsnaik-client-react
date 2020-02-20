@@ -13,8 +13,8 @@ export const createWidget = async (topicId, widget) => {
 };
 
 export const saveAllWidgets = async (topicId, widgets) => {
-    const response = await fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets-collection`, {
-        method: "POST",
+    const response = await fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets`, {
+        method: "PUT",
         body: JSON.stringify(widgets),
         headers: {
             'content-type': 'application/json'
