@@ -48,22 +48,29 @@ const ParagraphWidgetComponent = (props) =>
                  <div className="row mx-1 my-2">
                      <div className="col">
                          <div className="form-group">
-                            <textarea className="form-control"
-                                      placeholder="Paragraph text"
-                                      value={props.widget.paragraphText}
-                                      onChange={(e) => {
-                                          let newText = e.target.value;
-                                          props.updateWidget({
-                                                                 ...props.widget,
-                                                                 paragraphText: newText
-                                                             }
-                                          );
-                                      }}/>
+                             <label htmlFor={`wbdvParaText-${props.widget._id}`}> Paragraph
+                                 Text </label>
+
+                             <textarea className="form-control"
+                                       placeholder="Paragraph text"
+                                       value={props.widget.paragraphText}
+                                       id={`wbdvParaText-${props.widget._id}`}
+                                       onChange={(e) => {
+                                           let newText = e.target.value;
+                                           props.updateWidget({
+                                                                  ...props.widget,
+                                                                  paragraphText: newText
+                                                              }
+                                           );
+                                       }}/>
                          </div>
 
                          <div className="form-group">
+                             <label htmlFor={`wbdvWidgetName-${props.widget._id}`}> Widget
+                                 Name </label>
                              <input type="text" className="form-control"
                                     placeholder="Widget Name"
+                                    id={`wbdvWidgetName-${props.widget._id}`}
                                     value={props.widget.name}
                                     onChange={(e) => {
                                         let newText = e.target.value;
