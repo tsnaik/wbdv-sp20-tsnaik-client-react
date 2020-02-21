@@ -53,6 +53,7 @@ const ParagraphWidgetComponent = (props) =>
 
                              <textarea className="form-control"
                                        placeholder="Paragraph text"
+                                       rows='4'
                                        value={props.widget.paragraphText}
                                        id={`wbdvParaText-${props.widget._id}`}
                                        onChange={(e) => {
