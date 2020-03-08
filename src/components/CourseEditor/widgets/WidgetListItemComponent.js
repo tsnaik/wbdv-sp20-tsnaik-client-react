@@ -2,6 +2,7 @@ import React from "react";
 import HeadingWidgetComponent from "./HeadingWidgetComponent";
 import ParagraphWidgetComponent from "./ParagraphWidgetComponent";
 import ImageWidgetComponent from "./ImageWidgetComponent";
+import ListWidgetComponent from "./ListWidgetComponent";
 
 const WidgetListItemComponent = (props) =>
     <div>
@@ -17,6 +18,12 @@ const WidgetListItemComponent = (props) =>
 
         {props.widget.type === 'image' &&
          <ImageWidgetComponent
+             {...props}/>
+        }
+
+
+        {props.widget.type === 'list' &&
+         <ListWidgetComponent
              {...props}/>
         }
 

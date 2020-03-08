@@ -1,7 +1,7 @@
-import {API_URL_LESSONS, API_URL_TOPICS} from "../common/Constants";
+import {API_URL_LESSONS_NEW, API_URL_TOPICS} from "../common/Constants";
 
 export const createTopic = async (lessonId, topic) => {
-    const response = await fetch(`${API_URL_LESSONS}/${lessonId}/topics`, {
+    const response = await fetch(`${API_URL_LESSONS_NEW}/${lessonId}/topics`, {
         method: "POST",
         body: JSON.stringify(topic),
         headers: {
@@ -13,7 +13,7 @@ export const createTopic = async (lessonId, topic) => {
 };
 
 export const findAllTopicsForLesson = (lessonId) => {
-    return fetch(`${API_URL_LESSONS}/${lessonId}/topics`)
+    return fetch(`${API_URL_LESSONS_NEW}/${lessonId}/topics`)
         .then(response => response.json());
 };
 

@@ -8,14 +8,14 @@ import {
 } from "../../../actions/WidgetActions";
 import {connect} from "react-redux";
 
-const ParagraphWidgetComponent = (props) =>
+const ListWidgetComponent = (props) =>
     <div>
         <div className={`mt-1 ${props.preview === false ? 'border rounded' : ''}`}>
             {props.preview === false &&
              <div>
                  <div className="row mx-1 my-2">
                      <div className="col">
-                         <h5 className="wbdv-widget-header mt-2 align-center">Paragraph
+                         <h5 className="wbdv-widget-header mt-2 align-center">List
                              Widget</h5>
                          <span className="float-md-right form-inline">
                         {props.index !== props.size - 1 && <button
@@ -50,14 +50,14 @@ const ParagraphWidgetComponent = (props) =>
                  <div className="row mx-1 my-2">
                      <div className="col">
                          <div className="form-group">
-                             <label htmlFor={`wbdvParaText-${props.widget._id}`}> Paragraph
-                                 Text </label>
+                             <label htmlFor={`wbdvListText-${props.widget._id}`}> List
+                                 Items (Put each item in a new line) </label>
 
                              <textarea className="form-control"
-                                       placeholder="Paragraph text"
+                                       placeholder="Enter one list item per line"
                                        rows='4'
                                        value={props.widget.paragraphText}
-                                       id={`wbdvParaText-${props.widget._id}`}
+                                       id={`wbdvListText-${props.widget._id}`}
                                        onChange={(e) => {
                                            let newText = e.target.value;
                                            props.updateWidget({
@@ -67,7 +67,24 @@ const ParagraphWidgetComponent = (props) =>
                                            );
                                        }}/>
                          </div>
-
+                         <div className="form-group ">
+                             <label htmlFor={`wbdvListTypeSize-${props.widget._id}`}> List
+                                 Type </label>
+                             <select className="custom-select"
+                                     id={`wbdvListTypeSize-${props.widget._id}`}
+                                     value={props.widget.style}
+                                     onChange={(e) => {
+                                         let newStyle = e.target.value;
+                                         props.updateWidget({
+                                                                ...props.widget,
+                                                                style: newStyle
+                                                            }
+                                         );
+                                     }}>
+                                 <option value="unordered">Unordered List</option>
+                                 <option value="ordered">Ordered List</option>
+                             </select>
+                         </div>
                          <div className="form-group">
                              <label htmlFor={`wbdvWidgetName-${props.widget._id}`}> Widget
                                  Name </label>
@@ -91,7 +108,32 @@ const ParagraphWidgetComponent = (props) =>
             <div className="row mx-1 my-2">
                 <div className="col">
                     {props.preview === false && <h5>Preview</h5>}
-                    <p className='wbdv-paragraph'>{props.widget.paragraphText}</p>
+                    {props.widget.style === 'ordered' && props.widget.paragraphText &&
+                     <div>
+                         <ol>
+                             {props.widget.paragraphText.split('\n')
+                                 .map(item =>
+                                             <li>
+                                                 {item}
+                                             </li>
+                             )
+                             }
+                         </ol>
+                     </div>
+                    }
+                    {props.widget.style === 'unordered' && props.widget.paragraphText &&
+                     <div>
+                         <ul>
+                             {props.widget.paragraphText.split('\n')
+                                 .map(item =>
+                                             <li>
+                                                 {item}
+                                             </li>
+                             )
+                             }
+                         </ul>
+                     </div>
+                    }
                 </div>
             </div>
         </div>
@@ -118,4 +160,4 @@ const stateToPropertyMapper = (state) => {
 export default connect(
     stateToPropertyMapper,
     dispatchToPropertyMapper)
-(ParagraphWidgetComponent)
+(ListWidgetComponent)

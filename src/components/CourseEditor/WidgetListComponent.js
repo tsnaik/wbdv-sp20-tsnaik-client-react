@@ -63,7 +63,7 @@ class WidgetListComponent extends React.Component {
                                 <div className="float-right">
                                     <button className="btn btn-primary m-1"
                                             onClick={() => this.props.createWidget(
-                                                this.props.currentTopicId)}>
+                                                this.props.currentTopicId,{type: 'heading', size: 1, style: 'unordered'})}>
                                         <i className="fas fa-plus-circle"></i>
                                     </button>
                                 </div>
@@ -87,8 +87,8 @@ const stateToPropertyMapper = (state) => {
 
 const dispatchToPropertyMapper = (dispatch) => {
     return {
-        createWidget: (id) => {
-            widgetService.createWidget(id, {type: 'heading', size: 1})
+        createWidget: (id, widget) => {
+            widgetService.createWidget(id, widget)
                 .then(actual =>
                           dispatch(createWidget(actual)))
         },

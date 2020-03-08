@@ -1,7 +1,7 @@
-import {API_URL_TOPICS_NEW, API_URL_WIDGETS} from "../common/Constants";
+import {API_URL_TOPICS, API_URL_WIDGETS} from "../common/Constants";
 
 export const createWidget = async (topicId, widget) => {
-    const response = await fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets`, {
+    const response = await fetch(`${API_URL_TOPICS}/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify(widget),
         headers: {
@@ -13,7 +13,7 @@ export const createWidget = async (topicId, widget) => {
 };
 
 export const saveAllWidgets = async (topicId, widgets) => {
-    const response = await fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets`, {
+    const response = await fetch(`${API_URL_TOPICS}/${topicId}/widgets`, {
         method: "PUT",
         body: JSON.stringify(widgets),
         headers: {
@@ -25,7 +25,7 @@ export const saveAllWidgets = async (topicId, widgets) => {
 };
 
 export const findAllWidgetsForTopic = (topicId) => {
-    return fetch(`${API_URL_TOPICS_NEW}/${topicId}/widgets`)
+    return fetch(`${API_URL_TOPICS}/${topicId}/widgets`)
         .then(response => response.json());
 };
 

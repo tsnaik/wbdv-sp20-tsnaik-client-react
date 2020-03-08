@@ -39,7 +39,7 @@ const ImageWidgetComponent = (props) =>
                             <option value="heading">Heading</option>
                             <option value="paragraph">Paragraph</option>
                             <option value="image">Image</option>
-
+                            <option value="list">List</option>
                         </select>
                         <button className="btn btn-danger m-1"
                                 onClick={() => props.deleteWidget(props.widget._id)}><i
