@@ -72,6 +72,8 @@ class TopicPillsItemComponent extends React.Component {
                      <span className="btn"
                            onClick={() => {
                                if (this.state.topic._id === this.props.currentTopicId) {
+                                   this.props.history.push(
+                                       `/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`);
                                    this.props.updateCurrentTopicId(null);
                                }
                                this.props.deleteTopic(this.state.topic._id);
@@ -106,7 +108,7 @@ const dispatchToPropertyMapper = (dispatch) => {
                               dispatch(updateTopic(obj))),
             deleteTopic: (id) =>
                 topicService.deleteTopic(id)
-                    .then(status =>
+                    .then(() =>
                               dispatch(deleteTopic(id))),
             updateCurrentTopicId: (newId) =>
                 dispatch(updateTopicId(newId)),
